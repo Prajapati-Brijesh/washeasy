@@ -1,0 +1,2633 @@
+
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Our Services – WashEasy Laundry</title>
+  <meta name="description" content="WashEasy – Professional laundry, dry cleaning and ironing service with free pickup & delivery." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="style.css" />
+  <style>
+/* =====================================================
+   WashEasy – Modern Premium Stylesheet 2026
+   Vibrant, Clean & Luxury Aesthetic
+   ===================================================== */
+
+/* -------- CSS Variables -------- */
+:root {
+  --primary: #7C3AED;
+  --primary-light: #A78BFA;
+  --primary-dark: #6D28D9;
+  --secondary: #EC4899;
+  --accent: #F59E0B;
+  --accent2: #06B6D4;
+  --accent3: #10B981;
+  --dark: #0F172A;
+  --dark2: #1E293B;
+  --dark3: #334155;
+  --text: #1E293B;
+  --text-light: #64748B;
+  --white: #FFFFFF;
+  --light-bg: #F8FAFC;
+  --card-bg: #FFFFFF;
+  --border: rgba(226, 232, 240, 0.85);
+  --shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 10px 25px -5px rgba(0, 0, 0, 0.06);
+  --shadow-lg: 0 20px 45px -10px rgba(124, 58, 237, 0.16);
+  --radius: 20px;
+  --radius-sm: 12px;
+  --radius-lg: 28px;
+  --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  --font: 'Poppins', sans-serif;
+  --font2: 'Nunito', sans-serif;
+}
+
+/* -------- Reset & Base -------- */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; font-size: 16px; }
+body {
+  font-family: var(--font);
+  color: var(--text);
+  background: var(--white);
+  overflow-x: hidden;
+  line-height: 1.6;
+}
+a { text-decoration: none; color: inherit; }
+ul { list-style: none; }
+img { max-width: 100%; display: block; }
+input, select, textarea, button { font-family: var(--font); outline: none; }
+.container { width: 92%; max-width: 1280px; margin: 0 auto; }
+
+/* -------- Preloader -------- */
+#preloader { display: none !important; }
+.preloader-inner { text-align: center; color: white; }
+.wash-spinner {
+  font-size: 3.8rem;
+  color: var(--primary-light);
+  animation: spin 1.5s linear infinite;
+  margin-bottom: 1rem;
+  filter: drop-shadow(0 0 20px rgba(167, 139, 250, 0.5));
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+.preloader-inner p { font-size: 1.15rem; letter-spacing: 2px; font-weight: 600; color: #E2E8F0; }
+.dots { animation: dotAnim 1.5s steps(3, end) infinite; }
+@keyframes dotAnim { 0% { content: '.'; } 33% { content: '..'; } 66% { content: '...'; } }
+
+/* -------- Modal Overlay -------- */
+.modal-overlay {
+  position: fixed; inset: 0;
+  background: rgba(15, 23, 42, 0.75);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  z-index: 1000;
+  display: flex; align-items: center; justify-content: center;
+  padding: 1rem;
+}
+.modal-overlay.hidden { display: none !important; }
+.modal-close {
+  position: absolute; top: 1.2rem; right: 1.2rem;
+  background: var(--light-bg); border: 1px solid var(--border); cursor: pointer;
+  width: 36px; height: 36px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--text-light); font-size: 1rem;
+  transition: var(--transition);
+}
+.modal-close:hover { background: var(--secondary); color: white; transform: rotate(90deg); border-color: transparent; }
+
+/* -------- Auth Modal -------- */
+.auth-modal-box {
+  background: white; border-radius: var(--radius-lg);
+  padding: 2.5rem; width: 100%; max-width: 440px;
+  position: relative;
+  animation: slideUp 0.35s ease;
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.25);
+  border: 1px solid rgba(226, 232, 240, 0.8);
+}
+@keyframes slideUp { from { opacity: 0; transform: translateY(25px); } to { opacity: 1; transform: translateY(0); } }
+.auth-tabs { display: flex; gap: 0.5rem; margin-bottom: 1.8rem; background: var(--light-bg); border-radius: 50px; padding: 5px; border: 1px solid var(--border); }
+.auth-tab {
+  flex: 1; padding: 0.65rem 1rem; border: none; background: transparent;
+  border-radius: 50px; font-weight: 700; font-size: 0.9rem;
+  color: var(--text-light); cursor: pointer; transition: var(--transition);
+}
+.auth-tab.active { background: var(--white); color: var(--primary); box-shadow: 0 2px 10px rgba(0,0,0,0.06); }
+.auth-form h2 { font-size: 1.6rem; font-weight: 800; color: var(--dark); margin-bottom: 0.3rem; }
+.auth-subtitle { color: var(--text-light); font-size: 0.9rem; margin-bottom: 1.5rem; }
+.auth-form.hidden { display: none !important; }
+.auth-switch { text-align: center; margin-top: 1.2rem; font-size: 0.88rem; color: var(--text-light); }
+.auth-switch a { color: var(--primary); font-weight: 700; }
+.auth-switch a:hover { text-decoration: underline; }
+
+/* Form Components */
+.form-group { margin-bottom: 1.1rem; }
+.form-group label {
+  display: flex; align-items: center; gap: 0.5rem;
+  font-size: 0.85rem; font-weight: 700; color: var(--dark3); margin-bottom: 0.4rem;
+}
+.form-group label i { color: var(--primary); }
+.form-group input, .form-group select, .form-group textarea {
+  width: 100%; padding: 0.75rem 1rem;
+  border: 1.5px solid var(--border); border-radius: var(--radius-sm);
+  background: #FFFFFF; font-size: 0.92rem; color: var(--text);
+  transition: var(--transition);
+}
+.form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.15);
+}
+
+/* -------- Booking Modal -------- */
+.booking-modal-box {
+  background: white; border-radius: var(--radius-lg);
+  padding: 2.2rem; width: 100%; max-width: 560px;
+  position: relative;
+  animation: slideUp 0.35s ease;
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.25);
+  max-height: 90vh; overflow-y: auto;
+  border: 1px solid rgba(226, 232, 240, 0.8);
+}
+.booking-steps { display: flex; align-items: center; justify-content: center; margin-bottom: 1.8rem; }
+.step { display: flex; align-items: center; gap: 0.5rem; font-size: 0.85rem; font-weight: 700; color: var(--text-light); }
+.step span {
+  width: 32px; height: 32px; border-radius: 50%;
+  background: var(--light-bg); border: 2px solid var(--border);
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 800; font-size: 0.85rem; transition: var(--transition);
+}
+.step.active { color: var(--primary); }
+.step.active span { background: var(--primary); color: white; border-color: var(--primary); box-shadow: 0 4px 12px rgba(124, 58, 237, 0.3); }
+.step.done span { background: var(--accent3); color: white; border-color: var(--accent3); }
+.step-line { width: 40px; height: 2px; background: var(--border); margin: 0 0.6rem; }
+.booking-page h2 { font-size: 1.45rem; font-weight: 800; color: var(--dark); margin-bottom: 1.2rem; }
+.booking-page.hidden { display: none !important; }
+.service-select-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.75rem; margin-bottom: 1.2rem;
+}
+.service-select-card {
+  border: 2px solid var(--border); border-radius: var(--radius-sm);
+  padding: 1rem 0.6rem; text-align: center; cursor: pointer;
+  transition: var(--transition); background: var(--light-bg);
+}
+.service-select-card i { font-size: 1.6rem; color: var(--primary); margin-bottom: 0.5rem; display: block; }
+.service-select-card h4 { font-size: 0.85rem; font-weight: 700; color: var(--dark); margin-bottom: 0.2rem; }
+.service-select-card p { font-size: 0.78rem; font-weight: 700; color: var(--secondary); }
+.service-select-card:hover { border-color: var(--primary); background: white; transform: translateY(-2px); }
+.service-select-card.selected {
+  border-color: var(--primary); background: #FAF8FF;
+  box-shadow: 0 6px 18px rgba(124, 58, 237, 0.2);
+}
+.order-summary {
+  background: var(--light-bg); border-radius: var(--radius-sm);
+  padding: 1.3rem; margin-bottom: 1.2rem; border: 1px solid var(--border);
+}
+.order-summary h3 { font-size: 1rem; font-weight: 800; color: var(--dark); margin-bottom: 0.8rem; }
+.summary-row {
+  display: flex; justify-content: space-between; align-items: center;
+  font-size: 0.88rem; padding: 0.35rem 0; color: var(--text-light);
+}
+.summary-row strong { color: var(--dark); font-weight: 700; }
+.total-row {
+  border-top: 1.5px dashed var(--border); margin-top: 0.6rem; padding-top: 0.8rem;
+  font-size: 1.05rem;
+}
+.total-row strong { color: var(--primary); font-size: 1.35rem; font-weight: 900; }
+.payment-methods { margin-bottom: 1.3rem; }
+.payment-methods h3 { font-size: 0.95rem; font-weight: 800; color: var(--dark); margin-bottom: 0.6rem; }
+.pay-options { display: flex; flex-direction: column; gap: 0.5rem; }
+.pay-opt {
+  display: flex; align-items: center; gap: 0.8rem;
+  padding: 0.75rem 1rem; border: 1.5px solid var(--border); border-radius: var(--radius-sm);
+  cursor: pointer; transition: var(--transition); background: white;
+}
+.pay-opt:hover { border-color: var(--primary); background: #FAF8FF; }
+.pay-opt input { accent-color: var(--primary); width: 18px; height: 18px; cursor: pointer; }
+.pay-opt span { font-size: 0.88rem; font-weight: 600; color: var(--dark); display: flex; align-items: center; gap: 0.5rem; }
+.pay-opt i { color: var(--primary); font-size: 1.1rem; }
+.btn-row { display: flex; gap: 0.8rem; margin-top: 1.2rem; }
+.btn-row .btn-outline { flex: 1; }
+.btn-row .btn-primary { flex: 2; }
+
+/* -------- Success Modal -------- */
+.success-box {
+  background: white; border-radius: var(--radius-lg);
+  padding: 2.5rem; width: 100%; max-width: 440px; text-align: center;
+  animation: popIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.25);
+}
+@keyframes popIn { from { opacity: 0; transform: scale(0.85); } to { opacity: 1; transform: scale(1); } }
+.success-icon { font-size: 3.5rem; margin-bottom: 1rem; }
+.success-box h2 { font-size: 1.6rem; font-weight: 800; color: var(--dark); margin-bottom: 0.6rem; }
+.success-box p { color: var(--text-light); font-size: 0.92rem; line-height: 1.5; margin-bottom: 1.4rem; }
+.order-track-badge {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  background: #ECFDF5; border: 1px solid rgba(16, 185, 129, 0.3);
+  padding: 0.6rem 1.2rem; border-radius: 50px;
+  font-size: 0.85rem; color: #065F46; font-weight: 700; margin-bottom: 1.5rem;
+}
+.order-track-badge strong { color: #047857; }
+
+/* -------- Buttons -------- */
+.btn-primary {
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  color: white; border: none; padding: 0.85rem 1.6rem;
+  border-radius: 50px; font-weight: 700; font-size: 0.92rem;
+  cursor: pointer; display: inline-flex; align-items: center; justify-content: center;
+  gap: 0.5rem; box-shadow: 0 6px 20px rgba(124, 58, 237, 0.35);
+  transition: var(--transition);
+}
+.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 10px 28px rgba(124, 58, 237, 0.45); filter: brightness(1.06); }
+.btn-outline {
+  background: transparent; color: var(--dark);
+  border: 1.5px solid var(--border); padding: 0.85rem 1.6rem;
+  border-radius: 50px; font-weight: 700; font-size: 0.92rem;
+  cursor: pointer; display: inline-flex; align-items: center; justify-content: center;
+  gap: 0.5rem; transition: var(--transition);
+}
+.btn-outline:hover { border-color: var(--primary); color: var(--primary); background: #FAF8FF; }
+.full-width { width: 100%; }
+
+/* -------- Navbar -------- */
+.navbar {
+  position: fixed; top: 0; left: 0; right: 0;
+  z-index: 900;
+  background: rgba(15, 23, 42, 0.92);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 0.75rem 0;
+  transition: var(--transition);
+}
+.navbar.scrolled {
+  background: rgba(15, 23, 42, 0.98);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.35);
+  padding: 0.55rem 0;
+}
+.nav-container {
+  width: 94%; max-width: 1360px; margin: 0 auto;
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 1rem;
+}
+.nav-logo {
+  display: flex; align-items: center; gap: 0.5rem;
+  font-size: 1.55rem; font-weight: 900; letter-spacing: -0.5px;
+}
+.logo-icon { font-size: 1.9rem; filter: drop-shadow(0 2px 8px rgba(124, 58, 237, 0.4)); }
+.logo-text { color: #FFFFFF; }
+.logo-accent {
+  background: linear-gradient(135deg, #EC4899, #F59E0B);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.nav-links { display: flex; align-items: center; gap: 0.4rem; list-style: none; }
+.nav-links a {
+  color: #CBD5E1; font-weight: 600; font-size: 0.86rem;
+  padding: 0.45rem 0.85rem; border-radius: 50px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  transition: var(--transition);
+  display: inline-flex; align-items: center; gap: 0.4rem;
+  white-space: nowrap;
+}
+.nav-links a:hover {
+  color: #FFFFFF;
+  background: rgba(255, 255, 255, 0.15);
+  border-color: rgba(255, 255, 255, 0.25);
+  transform: translateY(-1px);
+}
+.nav-links a.active {
+  background: linear-gradient(135deg, #7C3AED, #EC4899);
+  color: #FFFFFF;
+  border-color: transparent;
+  box-shadow: 0 4px 15px rgba(124, 58, 237, 0.45);
+  font-weight: 700;
+}
+.nav-actions { display: flex; align-items: center; gap: 0.6rem; }
+.btn-primary-nav {
+  background: linear-gradient(135deg, #7C3AED, #EC4899);
+  color: white; border: none; padding: 0.55rem 1.3rem;
+  border-radius: 50px; font-weight: 700; font-size: 0.88rem;
+  cursor: pointer; display: inline-flex; align-items: center; gap: 0.45rem;
+  box-shadow: 0 4px 16px rgba(236, 72, 153, 0.35);
+  transition: var(--transition);
+  white-space: nowrap;
+}
+.btn-primary-nav:hover { transform: translateY(-2px); box-shadow: 0 6px 22px rgba(236, 72, 153, 0.5); filter: brightness(1.08); }
+.btn-outline-nav {
+  background: rgba(255,255,255,0.08); color: white;
+  border: 1px solid rgba(255,255,255,0.2); padding: 0.55rem 1.1rem;
+  border-radius: 50px; font-weight: 700; font-size: 0.88rem;
+  cursor: pointer; display: inline-flex; align-items: center; gap: 0.45rem;
+  transition: var(--transition);
+}
+.btn-outline-nav:hover { background: rgba(255,255,255,0.2); border-color: rgba(255,255,255,0.4); }
+.hamburger { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: 4px; }
+.hamburger span { display: block; width: 24px; height: 2px; background: white; border-radius: 2px; transition: var(--transition); }
+.hamburger.active span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.hamburger.active span:nth-child(2) { opacity: 0; }
+.hamburger.active span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+.user-menu { position: relative; }
+.btn-user {
+  background: rgba(255,255,255,0.12); color: white; border: 1px solid rgba(255,255,255,0.2);
+  padding: 0.48rem 0.95rem; border-radius: 50px; font-weight: 600; font-size: 0.88rem;
+  cursor: pointer; display: flex; align-items: center; gap: 0.4rem;
+  transition: var(--transition);
+}
+.btn-user:hover { background: rgba(255,255,255,0.2); }
+.user-dropdown {
+  position: absolute; top: calc(100% + 10px); right: 0;
+  background: white; border-radius: var(--radius-sm);
+  box-shadow: 0 15px 40px rgba(0,0,0,0.15); padding: 0.5rem;
+  min-width: 180px; z-index: 950; border: 1px solid var(--border);
+}
+.user-dropdown.hidden { display: none !important; }
+.user-dropdown a {
+  display: flex; align-items: center; gap: 0.6rem;
+  padding: 0.65rem 1rem; border-radius: 8px;
+  color: var(--text); font-weight: 600; font-size: 0.88rem;
+  transition: var(--transition);
+}
+.user-dropdown a:hover { background: var(--light-bg); color: var(--primary); }
+
+/* -------- Page Hero (Subpages) -------- */
+.page-hero {
+  background: linear-gradient(135deg, #0F172A 0%, #1E1B4B 50%, #0F172A 100%);
+  padding: 135px 5% 50px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+.page-hero::before {
+  content: '';
+  position: absolute;
+  top: -60px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 650px;
+  height: 350px;
+  background: radial-gradient(ellipse at center, rgba(124, 58, 237, 0.35) 0%, rgba(236, 72, 153, 0.15) 50%, transparent 75%);
+  pointer-events: none;
+}
+.page-hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: 850px;
+  margin: 0 auto;
+}
+.page-hero h1 {
+  font-size: 2.7rem;
+  font-weight: 900;
+  color: #FFFFFF;
+  margin: 0.6rem 0 0.4rem;
+  line-height: 1.2;
+  letter-spacing: -0.5px;
+}
+.page-hero p {
+  color: #94A3B8;
+  font-size: 1.1rem;
+  max-width: 650px;
+  margin: 0 auto;
+}
+
+/* -------- Hero (Home) -------- */
+.hero {
+  min-height: 100vh;
+  padding: 140px 5% 80px;
+  background: linear-gradient(135deg, #FDFBFF 0%, #F5F3FF 50%, #EFF6FF 100%);
+  display: flex; align-items: center; justify-content: space-between;
+  position: relative; overflow: hidden;
+}
+.hero-bg-blobs { position: absolute; inset: 0; pointer-events: none; overflow: hidden; }
+.blob {
+  position: absolute; border-radius: 50%;
+  filter: blur(80px); opacity: 0.45;
+}
+.blob1 { width: 450px; height: 450px; background: #C4B5FD; top: -100px; right: 10%; }
+.blob2 { width: 350px; height: 350px; background: #FBCFE8; bottom: 5%; left: 5%; }
+.blob3 { width: 300px; height: 300px; background: #BAE6FD; top: 40%; right: 40%; }
+
+.hero-content { max-width: 620px; z-index: 2; }
+.hero-badge {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  background: #EDE9FE; border: 1px solid #DDD6FE;
+  padding: 0.45rem 1rem; border-radius: 50px;
+  font-size: 0.82rem; font-weight: 700; color: #6D28D9;
+  margin-bottom: 1.2rem;
+}
+.hero-title {
+  font-size: 3.5rem; font-weight: 900; line-height: 1.15;
+  color: var(--dark); margin-bottom: 1.2rem; letter-spacing: -1px;
+}
+.gradient-text {
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.hero-subtitle {
+  font-size: 1.15rem; color: var(--text-light); line-height: 1.7;
+  margin-bottom: 2rem;
+}
+.hero-cta { display: flex; flex-wrap: wrap; gap: 1rem; margin-bottom: 2.5rem; }
+.btn-hero-primary {
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  color: white; padding: 0.95rem 2rem; border-radius: 50px;
+  font-weight: 700; font-size: 1rem; border: none; cursor: pointer;
+  display: inline-flex; align-items: center; gap: 0.6rem;
+  box-shadow: 0 10px 30px rgba(124, 58, 237, 0.4);
+  transition: var(--transition);
+}
+.btn-hero-primary:hover { transform: translateY(-3px); box-shadow: 0 14px 35px rgba(124, 58, 237, 0.55); filter: brightness(1.06); }
+.btn-hero-outline {
+  background: white; color: var(--dark);
+  border: 1.5px solid var(--border); padding: 0.95rem 1.8rem;
+  border-radius: 50px; font-weight: 700; font-size: 1rem;
+  display: inline-flex; align-items: center; gap: 0.6rem;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.04);
+  transition: var(--transition);
+}
+.btn-hero-outline:hover { border-color: var(--primary); color: var(--primary); transform: translateY(-3px); }
+
+.hero-stats {
+  display: flex; align-items: center; gap: 2rem;
+  background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(10px);
+  padding: 1.2rem 2rem; border-radius: var(--radius);
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.05); width: fit-content;
+}
+.stat strong { display: block; font-size: 1.6rem; font-weight: 900; color: var(--dark); line-height: 1; margin-bottom: 0.2rem; }
+.stat span { font-size: 0.78rem; font-weight: 600; color: var(--text-light); }
+.stat-divider { width: 1px; height: 35px; background: var(--border); }
+
+/* Washing Machine Animation */
+.hero-visual { position: relative; z-index: 2; }
+.washing-machine-anim { position: relative; width: 340px; }
+.wm-body {
+  width: 290px; height: 360px;
+  background: linear-gradient(145deg, #FFFFFF, #EDE9FE);
+  border-radius: 36px; padding: 25px;
+  box-shadow: 0 30px 70px rgba(124, 58, 237, 0.25), inset 0 2px 4px rgba(255,255,255,0.8);
+  border: 4px solid #FFFFFF; position: relative; margin: 0 auto;
+}
+.wm-door {
+  width: 190px; height: 190px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #A78BFA, #6D28D9);
+  padding: 14px; margin: 25px auto 0;
+  box-shadow: inset 0 4px 10px rgba(0,0,0,0.25), 0 8px 25px rgba(124, 58, 237, 0.3);
+}
+.wm-drum {
+  width: 100%; height: 100%; border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #0F172A, #1E1B4B);
+  position: relative; overflow: hidden;
+  display: flex; align-items: center; justify-content: center;
+}
+.wm-clothes { font-size: 3rem; animation: tumble 2.5s ease-in-out infinite; }
+@keyframes tumble {
+  0% { transform: rotate(0deg) scale(1); }
+  50% { transform: rotate(180deg) scale(0.85); }
+  100% { transform: rotate(360deg) scale(1); }
+}
+.wm-bubble { position: absolute; border-radius: 50%; background: rgba(255,255,255,0.4); animation: bubbleRise 2s infinite ease-in; }
+.b1 { width: 14px; height: 14px; left: 25%; bottom: 10px; animation-delay: 0s; }
+.b2 { width: 20px; height: 20px; left: 55%; bottom: 10px; animation-delay: 0.6s; }
+.b3 { width: 10px; height: 10px; left: 75%; bottom: 10px; animation-delay: 1.2s; }
+@keyframes bubbleRise { 0% { transform: translateY(0); opacity: 0.8; } 100% { transform: translateY(-130px); opacity: 0; } }
+
+.wm-panel {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-top: 25px; padding: 0 10px;
+}
+.wm-btn { width: 14px; height: 14px; border-radius: 50%; background: #CBD5E1; box-shadow: inset 0 1px 2px rgba(0,0,0,0.2); }
+.wm-screen {
+  background: #0F172A; color: #10B981; font-family: monospace;
+  font-size: 0.85rem; font-weight: 700; padding: 4px 10px;
+  border-radius: 6px; letter-spacing: 2px;
+  box-shadow: inset 0 1px 3px rgba(0,0,0,0.5);
+}
+
+.floating-badge {
+  position: absolute; background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px); padding: 0.8rem 1.2rem;
+  border-radius: 18px; box-shadow: 0 15px 35px rgba(0,0,0,0.08);
+  display: flex; align-items: center; gap: 0.75rem;
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  animation: floatBadge 3.5s ease-in-out infinite alternate;
+}
+.fb1 { top: 30px; left: -25px; }
+.fb2 { bottom: 30px; right: -25px; animation-delay: -1.7s; }
+@keyframes floatBadge { from { transform: translateY(0); } to { transform: translateY(-12px); } }
+.floating-badge span { font-size: 1.6rem; }
+.floating-badge strong { display: block; font-size: 0.88rem; color: var(--dark); line-height: 1.2; }
+.floating-badge small { font-size: 0.72rem; color: var(--text-light); font-weight: 600; }
+
+/* -------- Promo Banner -------- */
+.promo-banner {
+  background: linear-gradient(135deg, #1E1B4B, #0F172A);
+  color: white; padding: 1.1rem 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+.promo-inner { display: flex; align-items: center; justify-content: center; gap: 1rem; font-size: 0.95rem; }
+.promo-fire { font-size: 1.4rem; animation: pulse 1s infinite alternate; }
+.promo-code {
+  background: #EC4899; color: white; padding: 0.2rem 0.6rem;
+  border-radius: 6px; font-weight: 800; letter-spacing: 1px;
+}
+.promo-btn {
+  background: white; color: var(--dark); padding: 0.35rem 0.9rem;
+  border-radius: 50px; font-size: 0.82rem; font-weight: 700;
+  transition: var(--transition);
+}
+.promo-btn:hover { background: var(--primary); color: white; }
+
+/* -------- Section Base -------- */
+section { padding: 5rem 0; }
+.section-header { text-align: center; max-width: 650px; margin: 0 auto 3.5rem; }
+.section-tag {
+  display: inline-block; background: #EDE9FE; color: var(--primary);
+  font-size: 0.82rem; font-weight: 800; text-transform: uppercase;
+  letter-spacing: 1.5px; padding: 0.35rem 0.9rem; border-radius: 50px;
+  margin-bottom: 0.8rem;
+}
+.section-header h2 {
+  font-size: 2.4rem; font-weight: 900; color: var(--dark);
+  margin-bottom: 0.6rem; letter-spacing: -0.5px; line-height: 1.2;
+}
+.section-header p { color: var(--text-light); font-size: 1.05rem; }
+.section-header.light .section-tag { background: rgba(255,255,255,0.15); color: white; }
+.section-header.light h2 { color: white; }
+.section-header.light p { color: rgba(255,255,255,0.75); }
+
+/* -------- How It Works -------- */
+.steps { background: #FFFFFF; }
+.steps-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; position: relative; }
+.step-card {
+  background: #FFFFFF; border: 1.5px solid var(--border);
+  border-radius: 24px; padding: 2.5rem 2rem; text-align: center;
+  position: relative; transition: var(--transition);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.03);
+}
+.step-card:hover {
+  transform: translateY(-8px); border-color: var(--primary);
+  box-shadow: 0 20px 40px -10px rgba(124, 58, 237, 0.15);
+}
+.step-num {
+  position: absolute; top: 1.2rem; right: 1.5rem;
+  font-size: 2.8rem; font-weight: 900; color: #F1F5F9; line-height: 1;
+}
+.step-icon-wrap {
+  width: 72px; height: 72px; border-radius: 20px;
+  background: linear-gradient(135deg, rgba(124, 58, 237, 0.12), rgba(236, 72, 153, 0.12));
+  color: var(--primary); font-size: 1.8rem;
+  display: flex; align-items: center; justify-content: center;
+  margin: 0 auto 1.5rem; transition: var(--transition);
+}
+.step-card:hover .step-icon-wrap {
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  color: white; transform: scale(1.1);
+}
+.step-card h3 { font-size: 1.25rem; font-weight: 800; color: var(--dark); margin-bottom: 0.6rem; }
+.step-card p { color: var(--text-light); font-size: 0.92rem; line-height: 1.6; }
+
+/* -------- Services -------- */
+.services { background: var(--light-bg); }
+.services-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2rem;
+}
+.service-card {
+  background: #FFFFFF; border: 1px solid rgba(226, 232, 240, 0.9);
+  border-radius: 22px; padding: 2.2rem;
+  box-shadow: 0 4px 25px rgba(0, 0, 0, 0.04);
+  transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex; flex-direction: column; position: relative;
+}
+.service-card:hover {
+  transform: translateY(-8px); border-color: rgba(124, 58, 237, 0.4);
+  box-shadow: 0 20px 45px -10px rgba(124, 58, 237, 0.18);
+}
+.service-badge {
+  position: absolute; top: 1.5rem; right: 1.5rem;
+  background: linear-gradient(135deg, #EC4899, #F59E0B);
+  color: white; font-size: 0.75rem; font-weight: 800;
+  padding: 0.3rem 0.8rem; border-radius: 50px;
+}
+.service-icon {
+  width: 60px; height: 60px; border-radius: 16px;
+  background: linear-gradient(135deg, rgba(124, 58, 237, 0.12), rgba(236, 72, 153, 0.12));
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.6rem; color: var(--primary); margin-bottom: 1.4rem;
+  transition: var(--transition);
+}
+.service-card:hover .service-icon {
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  color: white; transform: scale(1.08) rotate(-4deg);
+}
+.service-card h3 { font-size: 1.25rem; font-weight: 800; color: var(--dark); margin-bottom: 0.5rem; }
+.service-card p { color: var(--text-light); font-size: 0.9rem; line-height: 1.6; margin-bottom: 1.2rem; }
+.service-features { margin-bottom: 1.5rem; }
+.service-features li {
+  display: flex; align-items: center; gap: 0.5rem;
+  font-size: 0.86rem; color: var(--dark3); padding: 0.25rem 0; font-weight: 600;
+}
+.service-features i { color: var(--accent3); font-size: 0.9rem; }
+.service-price {
+  font-size: 1.6rem; font-weight: 900; color: var(--primary);
+  margin-top: auto; margin-bottom: 1rem;
+}
+.service-price span { font-size: 0.85rem; font-weight: 600; color: var(--text-light); }
+.btn-service {
+  background: var(--light-bg); border: 1.5px solid var(--border);
+  color: var(--dark); width: 100%; padding: 0.8rem;
+  border-radius: 50px; font-weight: 700; font-size: 0.9rem;
+  cursor: pointer; transition: var(--transition);
+}
+.btn-service:hover {
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  color: white; border-color: transparent;
+  box-shadow: 0 6px 18px rgba(124, 58, 237, 0.35);
+}
+
+/* -------- Pricing -------- */
+.pricing { background: #0F172A; }
+.pricing-plans {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(310px, 1fr));
+  gap: 2rem; margin-bottom: 3.5rem; align-items: stretch;
+}
+.pricing-card {
+  background: rgba(30, 41, 59, 0.7); backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 24px; padding: 2.5rem 2rem;
+  transition: var(--transition); position: relative;
+  display: flex; flex-direction: column;
+}
+.pricing-card:hover { transform: translateY(-6px); border-color: var(--primary); }
+.pricing-card.popular-plan {
+  background: rgba(30, 41, 59, 0.95);
+  border: 2px solid var(--primary);
+  box-shadow: 0 20px 50px rgba(124, 58, 237, 0.3);
+  transform: scale(1.02);
+}
+.plan-badge {
+  position: absolute; top: -14px; left: 50%; transform: translateX(-50%);
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  color: white; font-size: 0.75rem; font-weight: 800;
+  padding: 0.35rem 1rem; border-radius: 50px; white-space: nowrap;
+}
+.plan-icon { font-size: 2.2rem; margin-bottom: 0.8rem; }
+.pricing-card h3 { color: white; font-size: 1.3rem; font-weight: 800; margin-bottom: 0.5rem; }
+.plan-price { font-size: 2.4rem; font-weight: 900; color: white; margin-bottom: 0.3rem; }
+.plan-price span { font-size: 0.95rem; font-weight: 600; color: #94A3B8; }
+.plan-desc { color: #94A3B8; font-size: 0.88rem; margin-bottom: 1.5rem; }
+.plan-features { margin-bottom: 2rem; flex: 1; }
+.plan-features li {
+  display: flex; align-items: center; gap: 0.6rem;
+  color: #E2E8F0; font-size: 0.88rem; padding: 0.45rem 0; font-weight: 600;
+}
+.plan-features li.disabled { color: #64748B; text-decoration: line-through; }
+.plan-features li i { font-size: 0.9rem; }
+.plan-features li:not(.disabled) i { color: var(--accent3); }
+.plan-features li.disabled i { color: #EF4444; }
+.btn-plan {
+  background: rgba(255,255,255,0.08); border: 1.5px solid rgba(255,255,255,0.2);
+  color: white; width: 100%; padding: 0.85rem; border-radius: 50px;
+  font-weight: 700; font-size: 0.9rem; cursor: pointer; transition: var(--transition);
+}
+.btn-plan:hover { background: white; color: var(--dark); border-color: white; }
+.btn-plan-primary {
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  color: white; width: 100%; padding: 0.9rem; border-radius: 50px;
+  border: none; font-weight: 700; font-size: 0.95rem; cursor: pointer;
+  box-shadow: 0 8px 25px rgba(124, 58, 237, 0.4); transition: var(--transition);
+}
+.btn-plan-primary:hover { transform: translateY(-2px); box-shadow: 0 12px 30px rgba(124, 58, 237, 0.55); filter: brightness(1.08); }
+
+.price-table-wrap {
+  background: rgba(30, 41, 59, 0.6); backdrop-filter: blur(10px);
+  border-radius: 24px; padding: 2.2rem;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+.price-table-wrap h3 { color: white; font-size: 1.35rem; font-weight: 800; margin-bottom: 1.4rem; }
+.price-table { overflow-x: auto; }
+.price-table table { width: 100%; border-collapse: collapse; }
+.price-table th {
+  background: rgba(255,255,255,0.08); color: #CBD5E1;
+  padding: 0.9rem 1.2rem; font-size: 0.92rem; font-weight: 700; text-align: left;
+}
+.price-table th:first-child { border-radius: 10px 0 0 10px; }
+.price-table th:last-child { border-radius: 0 10px 10px 0; }
+.price-table td {
+  padding: 0.85rem 1.2rem; color: #E2E8F0; font-size: 0.9rem;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+.price-table tr:hover td { background: rgba(255,255,255,0.04); }
+
+/* -------- Interactive Price Calculator -------- */
+.calculator-section { background: var(--light-bg); padding: 5rem 0; position: relative; }
+.calc-control-bar { display: flex; flex-direction: column; gap: 1.3rem; margin-bottom: 2.5rem; }
+.calc-categories { display: flex; flex-wrap: wrap; gap: 0.6rem; justify-content: center; }
+.calc-cat-btn {
+  background: var(--white); border: 1px solid var(--border);
+  padding: 0.65rem 1.3rem; border-radius: 50px;
+  font-size: 0.9rem; font-weight: 600; color: var(--text);
+  cursor: pointer; transition: var(--transition);
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+}
+.calc-cat-btn:hover { border-color: var(--primary); color: var(--primary); transform: translateY(-2px); box-shadow: 0 6px 18px rgba(124, 58, 237, 0.15); }
+.calc-cat-btn.active {
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  color: var(--white); border-color: transparent;
+  box-shadow: 0 6px 20px rgba(124, 58, 237, 0.35); transform: translateY(-2px);
+}
+
+.calc-tools-row { display: flex; flex-wrap: wrap; gap: 1rem; align-items: center; justify-content: space-between; }
+.calc-search-box { position: relative; flex: 1; min-width: 260px; max-width: 440px; }
+.calc-search-box i { position: absolute; left: 1rem; top: 50%; transform: translateY(-50%); color: var(--text-light); }
+.calc-search-box input {
+  width: 100%; padding: 0.75rem 1rem 0.75rem 2.6rem;
+  border-radius: var(--radius-sm); border: 1px solid var(--border);
+  background: var(--white); font-size: 0.92rem; outline: none; transition: var(--transition);
+}
+.calc-search-box input:focus { border-color: var(--primary); box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.15); }
+
+.calc-global-service {
+  display: flex; align-items: center; gap: 0.7rem;
+  background: var(--white); padding: 0.45rem 0.9rem;
+  border-radius: var(--radius-sm); border: 1px solid var(--border);
+}
+.calc-global-service label { font-size: 0.85rem; font-weight: 600; color: var(--text-light); white-space: nowrap; }
+.calc-global-service select {
+  padding: 0.45rem 0.8rem; border-radius: 8px; border: 1px solid var(--border);
+  background: var(--light-bg); font-size: 0.88rem; font-weight: 700; color: var(--primary);
+  outline: none; cursor: pointer;
+}
+
+.calc-layout { display: grid; grid-template-columns: 1fr 390px; gap: 2.2rem; align-items: start; }
+.calc-items-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 1.2rem; }
+.calc-item-card {
+  background: var(--white); border-radius: 18px; border: 2px solid transparent;
+  padding: 1.3rem; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex; flex-direction: column; position: relative; overflow: hidden;
+}
+.calc-item-card:hover { transform: translateY(-4px); border-color: rgba(124, 58, 237, 0.35); box-shadow: 0 15px 35px -5px rgba(124, 58, 237, 0.15); }
+.calc-item-card.has-qty { border-color: var(--primary); background: #FAF8FF; box-shadow: 0 8px 25px rgba(124, 58, 237, 0.2); }
+.calc-item-card.has-qty::before {
+  content: ''; position: absolute; top: 0; left: 0; width: 4px; height: 100%;
+  background: linear-gradient(180deg, var(--primary), var(--secondary));
+}
+.calc-card-top { display: flex; align-items: center; gap: 0.8rem; margin-bottom: 0.8rem; }
+.calc-item-icon {
+  width: 44px; height: 44px; border-radius: 12px;
+  background: linear-gradient(135deg, rgba(124, 58, 237, 0.12), rgba(236, 72, 153, 0.12));
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.25rem; color: var(--primary); flex-shrink: 0; transition: var(--transition);
+}
+.calc-item-card:hover .calc-item-icon { background: linear-gradient(135deg, var(--primary), var(--secondary)); color: white; transform: scale(1.05); }
+.calc-item-title { font-size: 0.98rem; font-weight: 700; color: var(--text); line-height: 1.25; margin-bottom: 0.2rem; }
+.calc-item-category { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.5px; color: var(--text-light); font-weight: 600; }
+.calc-service-select {
+  width: 100%; padding: 0.45rem 0.6rem; border-radius: 8px; border: 1px solid var(--border);
+  font-size: 0.82rem; font-weight: 600; color: var(--text); background: #FAF8FF;
+  margin-bottom: 0.9rem; outline: none; cursor: pointer; transition: var(--transition);
+}
+.calc-service-select:focus { border-color: var(--primary); background: white; }
+.calc-card-bottom {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-top: auto; padding-top: 0.7rem; border-top: 1px solid rgba(124, 58, 237, 0.08);
+}
+.calc-price-value { font-size: 1.25rem; font-weight: 800; color: var(--primary); line-height: 1; }
+.calc-price-sub { font-size: 0.7rem; color: var(--text-light); font-weight: 500; }
+.calc-stepper {
+  display: flex; align-items: center; gap: 0.35rem; background: var(--light-bg);
+  padding: 3px; border-radius: 50px; border: 1px solid var(--border);
+}
+.calc-step-btn {
+  width: 28px; height: 28px; border-radius: 50%; border: none;
+  background: white; color: var(--primary); font-weight: 700; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  transition: var(--transition); box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+}
+.calc-step-btn:hover { background: var(--primary); color: white; }
+.calc-step-val { min-width: 24px; text-align: center; font-weight: 800; font-size: 0.95rem; color: var(--text); }
+.calc-no-items { text-align: center; padding: 3rem 1rem; background: white; border-radius: var(--radius-sm); border: 1px dashed var(--border); color: var(--text-light); }
+.calc-no-items i { font-size: 2.5rem; margin-bottom: 0.8rem; color: var(--primary-light); }
+
+/* Sticky Summary Card */
+.calc-sidebar-col { position: sticky; top: 90px; }
+.calc-summary-card {
+  background: white; border-radius: 24px; padding: 1.8rem;
+  box-shadow: 0 15px 45px rgba(0, 0, 0, 0.08); border: 1px solid rgba(226, 232, 240, 0.9);
+  display: flex; flex-direction: column; gap: 1.2rem;
+}
+.calc-summary-header { display: flex; align-items: center; justify-content: space-between; padding-bottom: 0.8rem; border-bottom: 1px solid var(--border); }
+.calc-header-title { display: flex; align-items: center; gap: 0.75rem; }
+.calc-badge-icon {
+  width: 40px; height: 40px; border-radius: 12px;
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  color: white; display: flex; align-items: center; justify-content: center; font-size: 1.15rem;
+}
+.calc-header-title h3 { font-size: 1.15rem; font-weight: 800; color: var(--dark); line-height: 1.2; }
+.calc-item-count { font-size: 0.78rem; color: var(--text-light); font-weight: 600; }
+.btn-calc-clear {
+  background: none; border: 1px solid rgba(0,0,0,0.1); padding: 0.35rem 0.75rem;
+  border-radius: 20px; font-size: 0.78rem; font-weight: 600; color: var(--text-light);
+  cursor: pointer; transition: var(--transition); display: flex; align-items: center; gap: 0.35rem;
+}
+.btn-calc-clear:hover { background: #fee2e2; color: #DC2626; border-color: #DC2626; }
+
+.calc-delivery-tracker { background: #ECFDF5; border: 1px solid rgba(16, 185, 129, 0.3); border-radius: var(--radius-sm); padding: 0.75rem 0.9rem; }
+.tracker-info { display: flex; align-items: center; gap: 0.5rem; font-size: 0.8rem; color: #065F46; font-weight: 600; margin-bottom: 0.45rem; }
+.tracker-bar { width: 100%; height: 6px; background: #D1FAE5; border-radius: 10px; overflow: hidden; }
+.tracker-fill { height: 100%; background: linear-gradient(90deg, var(--accent3), var(--accent2)); border-radius: 10px; transition: width 0.4s ease; }
+
+.calc-selected-wrapper { display: flex; flex-direction: column; }
+.calc-selected-header { display: flex; justify-content: space-between; font-size: 0.82rem; font-weight: 700; color: var(--text); margin-bottom: 0.5rem; }
+.selected-sub { font-size: 0.74rem; color: var(--text-light); font-weight: 400; }
+.calc-selected-list { max-height: 160px; overflow-y: auto; display: flex; flex-direction: column; gap: 0.45rem; padding-right: 4px; }
+.calc-selected-row {
+  display: flex; align-items: center; justify-content: space-between;
+  background: var(--light-bg); padding: 0.45rem 0.65rem; border-radius: 8px; font-size: 0.82rem;
+}
+.row-item-name { font-weight: 700; color: var(--text); }
+.row-item-service { font-size: 0.7rem; color: var(--primary); font-weight: 600; }
+.row-item-actions { display: flex; align-items: center; gap: 0.6rem; }
+.row-item-price { font-weight: 800; color: var(--text); }
+.row-remove-btn { background: none; border: none; color: var(--text-light); cursor: pointer; font-size: 0.75rem; }
+.row-remove-btn:hover { color: #DC2626; }
+.calc-empty-hint { text-align: center; padding: 1.2rem 0; color: var(--text-light); }
+.empty-basket-icon { font-size: 1.8rem; margin-bottom: 0.3rem; }
+
+.calc-addon-section { display: flex; flex-direction: column; }
+.addon-header-text { font-size: 0.82rem; font-weight: 700; color: var(--text); margin-bottom: 0.45rem; display: block; }
+.calc-addon-card {
+  display: flex; align-items: center; gap: 0.7rem; padding: 0.55rem 0.75rem;
+  border-radius: var(--radius-sm); border: 1px solid var(--border);
+  cursor: pointer; transition: var(--transition); margin-bottom: 0.45rem; background: white;
+}
+.calc-addon-card:hover { border-color: var(--primary); background: #FAF8FF; }
+.calc-addon-card input[type="checkbox"] { accent-color: var(--primary); width: 16px; height: 16px; cursor: pointer; }
+.addon-card-text { flex: 1; display: flex; flex-direction: column; }
+.addon-card-text strong { font-size: 0.8rem; color: var(--text); }
+.addon-card-text small { font-size: 0.7rem; color: var(--text-light); }
+.addon-cost { font-size: 0.82rem; font-weight: 800; color: var(--primary); }
+
+.calc-promo-section { display: flex; flex-direction: column; }
+.calc-promo-input-row { display: flex; gap: 0.5rem; }
+.calc-promo-input-row input {
+  flex: 1; padding: 0.5rem 0.75rem; border-radius: 8px; border: 1px solid var(--border);
+  font-size: 0.84rem; text-transform: uppercase; font-weight: 700; outline: none;
+}
+.btn-apply-promo {
+  padding: 0.5rem 0.9rem; border-radius: 8px; border: none;
+  background: var(--dark); color: white; font-weight: 700; font-size: 0.82rem; cursor: pointer;
+}
+.btn-apply-promo:hover { background: var(--primary); }
+.promo-quick-chips { display: flex; flex-wrap: wrap; gap: 0.35rem; margin-top: 0.45rem; }
+.promo-chip {
+  background: white; border: 1px dashed var(--primary-light); color: var(--primary);
+  font-size: 0.72rem; font-weight: 700; padding: 0.2rem 0.5rem; border-radius: 6px; cursor: pointer;
+}
+.promo-chip:hover { background: var(--primary); color: white; border-style: solid; }
+.promo-feedback { font-size: 0.78rem; padding: 0.4rem 0.6rem; border-radius: 6px; margin-top: 0.45rem; font-weight: 600; }
+.promo-feedback.success { background: #D1FAE5; color: #065F46; }
+.promo-feedback.error { background: #FEE2E2; color: #991B1B; }
+
+.calc-bill-breakdown { padding-top: 0.6rem; border-top: 1.5px dashed var(--border); display: flex; flex-direction: column; gap: 0.4rem; }
+.bill-row { display: flex; justify-content: space-between; font-size: 0.86rem; color: var(--text-light); }
+.bill-row strong { color: var(--text); font-weight: 700; }
+.bill-divider { height: 1px; background: var(--border); margin: 0.35rem 0; }
+.grand-total-row { display: flex; justify-content: space-between; align-items: center; margin-top: 0.15rem; }
+.grand-total-label { font-size: 1rem; font-weight: 800; color: var(--text); display: block; line-height: 1.1; }
+.tax-inclusive { font-size: 0.7rem; color: var(--text-light); }
+.grand-total-amount {
+  font-size: 1.75rem; font-weight: 900;
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+}
+.btn-calc-book {
+  width: 100%; padding: 0.95rem 1.3rem; border-radius: var(--radius-sm); border: none;
+  background: linear-gradient(135deg, var(--primary), var(--secondary)); color: white;
+  font-size: 0.98rem; font-weight: 800; cursor: pointer;
+  display: flex; align-items: center; justify-content: space-between;
+  box-shadow: 0 8px 25px rgba(124, 58, 237, 0.35); transition: var(--transition);
+}
+.btn-calc-book:hover { transform: translateY(-2px); box-shadow: 0 12px 30px rgba(124, 58, 237, 0.5); filter: brightness(1.06); }
+.book-price-tag { background: rgba(255,255,255,0.25); padding: 0.2rem 0.6rem; border-radius: 6px; font-size: 0.95rem; font-weight: 900; }
+.calc-trust-badges { display: flex; justify-content: space-between; font-size: 0.75rem; color: var(--text-light); font-weight: 600; text-align: center; }
+.calc-trust-badges span { display: flex; align-items: center; gap: 0.3rem; }
+.calc-trust-badges i { color: var(--accent3); }
+
+/* -------- Gallery -------- */
+.gallery { background: #FFFFFF; }
+.gallery-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; }
+.gallery-photo-card {
+  background: white; border-radius: 20px; overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05); border: 1px solid var(--border);
+  transition: var(--transition); display: flex; flex-direction: column;
+}
+.gallery-photo-card:hover { transform: translateY(-6px); box-shadow: 0 20px 40px -10px rgba(0,0,0,0.12); border-color: var(--primary); }
+.photo-ba-wrapper { position: relative; height: 260px; overflow: hidden; background: #E2E8F0; }
+.photo-ba-img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease; }
+.gallery-photo-card:hover .photo-ba-img { transform: scale(1.05); }
+.photo-badges { position: absolute; top: 1rem; left: 1rem; right: 1rem; display: flex; justify-content: space-between; pointer-events: none; }
+.p-badge {
+  padding: 0.3rem 0.8rem; border-radius: 50px; font-size: 0.75rem;
+  font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px;
+  backdrop-filter: blur(8px);
+}
+.before-badge { background: rgba(15, 23, 42, 0.75); color: white; }
+.after-badge { background: rgba(16, 185, 129, 0.85); color: white; }
+.photo-card-body { padding: 1.5rem; display: flex; flex-direction: column; flex: 1; }
+.photo-meta { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.6rem; }
+.photo-service-tag { font-size: 0.78rem; font-weight: 700; color: var(--primary); background: #FAF8FF; padding: 0.2rem 0.6rem; border-radius: 6px; }
+.photo-rating { font-size: 0.8rem; }
+.photo-card-body h4 { font-size: 1.1rem; font-weight: 800; color: var(--dark); margin-bottom: 0.4rem; }
+.photo-desc { color: var(--text-light); font-size: 0.86rem; line-height: 1.5; margin-bottom: 1.2rem; flex: 1; }
+.photo-footer { display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--border); padding-top: 0.8rem; }
+.turnaround { font-size: 0.78rem; color: var(--text-light); font-weight: 600; display: flex; align-items: center; gap: 0.35rem; }
+.btn-sm-primary {
+  background: var(--primary); color: white; border: none; padding: 0.45rem 1rem;
+  border-radius: 50px; font-size: 0.82rem; font-weight: 700; cursor: pointer; transition: var(--transition);
+}
+.btn-sm-primary:hover { background: var(--secondary); transform: translateY(-1px); }
+
+/* Gallery Lightbox */
+.gallery-lightbox {
+  position: fixed; inset: 0; background: rgba(15, 23, 42, 0.95);
+  backdrop-filter: blur(12px); z-index: 2000; display: flex; align-items: center; justify-content: center; padding: 2rem;
+}
+.gallery-lightbox.hidden { display: none !important; }
+.lightbox-close {
+  position: absolute; top: 1.5rem; right: 1.5rem; background: rgba(255,255,255,0.15);
+  color: white; border: none; width: 44px; height: 44px; border-radius: 50%;
+  font-size: 1.2rem; cursor: pointer; transition: var(--transition);
+}
+.lightbox-close:hover { background: var(--secondary); transform: rotate(90deg); }
+#lightbox-img { max-width: 90%; max-height: 85vh; border-radius: 16px; box-shadow: 0 25px 60px rgba(0,0,0,0.5); }
+
+/* -------- Tracking -------- */
+.order-track { background: var(--light-bg); }
+.track-box {
+  background: white; border-radius: 24px; padding: 2.5rem;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.05); border: 1px solid var(--border);
+  max-width: 800px; margin: 0 auto;
+}
+.track-input-row { display: flex; gap: 0.8rem; margin-bottom: 2rem; }
+.track-input-row input {
+  flex: 1; padding: 0.9rem 1.4rem; border: 1.5px solid var(--border);
+  border-radius: 50px; font-size: 0.95rem; font-weight: 600; transition: var(--transition);
+}
+.track-input-row input:focus { border-color: var(--primary); box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.15); }
+.track-result.hidden { display: none !important; }
+.track-header {
+  display: flex; justify-content: space-between; align-items: center;
+  padding-bottom: 1.5rem; border-bottom: 1px solid var(--border); margin-bottom: 2rem;
+}
+.track-header h3 { font-size: 1.3rem; font-weight: 800; color: var(--dark); }
+.track-header p { font-size: 0.88rem; color: var(--text-light); }
+.track-status-badge {
+  background: #EDE9FE; color: var(--primary); font-size: 0.85rem;
+  font-weight: 800; padding: 0.45rem 1.1rem; border-radius: 50px;
+}
+.timeline { display: flex; flex-direction: column; gap: 1.5rem; position: relative; margin-left: 1.5rem; }
+.timeline::before {
+  content: ''; position: absolute; left: 18px; top: 15px; bottom: 15px;
+  width: 3px; background: var(--border);
+}
+.tl-step { display: flex; align-items: flex-start; gap: 1.2rem; position: relative; z-index: 2; }
+.tl-circle {
+  width: 38px; height: 38px; border-radius: 50%; background: white;
+  border: 2px solid var(--border); color: var(--text-light);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.9rem; flex-shrink: 0; transition: var(--transition);
+}
+.tl-step.done .tl-circle { background: var(--accent3); color: white; border-color: var(--accent3); }
+.tl-step.active .tl-circle {
+  background: var(--primary); color: white; border-color: var(--primary);
+  box-shadow: 0 0 0 6px rgba(124, 58, 237, 0.2);
+}
+.tl-content h4 { font-size: 1rem; font-weight: 800; color: var(--dark); margin-bottom: 0.2rem; }
+.tl-content p { font-size: 0.82rem; color: var(--text-light); }
+
+/* -------- Reviews -------- */
+.reviews { background: white; }
+.reviews-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; }
+.review-card {
+  background: var(--light-bg); border-radius: 20px; padding: 2rem;
+  border: 1px solid var(--border); display: flex; flex-direction: column;
+  transition: var(--transition);
+}
+.review-card:hover { transform: translateY(-5px); border-color: var(--primary); box-shadow: 0 15px 35px rgba(0,0,0,0.06); }
+.review-stars { font-size: 1rem; margin-bottom: 0.8rem; }
+.review-text { font-size: 0.92rem; color: var(--text); line-height: 1.6; font-style: italic; margin-bottom: 1.5rem; flex: 1; }
+.reviewer { display: flex; align-items: center; gap: 0.8rem; }
+.reviewer-avatar {
+  width: 44px; height: 44px; border-radius: 50%;
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  color: white; font-weight: 800; font-size: 0.9rem;
+  display: flex; align-items: center; justify-content: center;
+}
+.reviewer strong { display: block; font-size: 0.92rem; color: var(--dark); }
+.reviewer span { font-size: 0.78rem; color: var(--text-light); }
+
+/* -------- Contact -------- */
+.contact { background: var(--light-bg); }
+.contact-grid { display: grid; grid-template-columns: 1fr 1.2fr; gap: 3rem; align-items: start; }
+.contact-card {
+  background: white; border: 1px solid var(--border); border-radius: 18px;
+  padding: 1.4rem; display: flex; align-items: center; gap: 1.2rem; margin-bottom: 1rem;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03); transition: var(--transition);
+}
+.contact-card:hover { transform: translateY(-3px); border-color: var(--primary); box-shadow: 0 10px 25px rgba(124, 58, 237, 0.12); }
+.contact-icon {
+  width: 50px; height: 50px; border-radius: 14px;
+  background: linear-gradient(135deg, rgba(124, 58, 237, 0.12), rgba(236, 72, 153, 0.12));
+  color: var(--primary); font-size: 1.4rem;
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+}
+.contact-card h4 { font-size: 1rem; font-weight: 800; color: var(--dark); margin-bottom: 0.2rem; }
+.contact-card p { font-size: 0.95rem; font-weight: 700; color: var(--primary); margin-bottom: 0.2rem; }
+.contact-card span { font-size: 0.78rem; color: var(--text-light); }
+
+.contact-form {
+  background: white; border-radius: 24px; padding: 2.5rem;
+  box-shadow: 0 15px 45px rgba(0, 0, 0, 0.06); border: 1px solid var(--border);
+}
+.contact-form h3 { font-size: 1.4rem; font-weight: 800; color: var(--dark); margin-bottom: 1.5rem; }
+
+/* -------- Footer -------- */
+.footer {
+  background: #0B0F19; color: #94A3B8; padding: 4.5rem 0 2rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+.footer-grid { display: grid; grid-template-columns: 1.5fr 1fr 1fr 1.2fr; gap: 3rem; margin-bottom: 3.5rem; }
+.footer-brand p { color: #64748B; font-size: 0.92rem; line-height: 1.6; margin: 1rem 0 1.5rem; }
+.social-links { display: flex; gap: 0.6rem; }
+.social-links a {
+  width: 38px; height: 38px; border-radius: 50%; background: rgba(255,255,255,0.06);
+  color: #CBD5E1; display: flex; align-items: center; justify-content: center;
+  transition: var(--transition); border: 1px solid rgba(255,255,255,0.08);
+}
+.social-links a:hover { background: var(--primary); color: white; transform: translateY(-2px); border-color: transparent; }
+.footer-links h4, .footer-contact h4 { color: #FFFFFF; font-size: 1.05rem; font-weight: 800; margin-bottom: 1.2rem; }
+.footer-links a {
+  color: #94A3B8; font-size: 0.88rem; transition: var(--transition);
+  display: inline-block; margin-bottom: 0.6rem;
+}
+.footer-links a:hover { color: var(--secondary); transform: translateX(4px); }
+.footer-contact p { font-size: 0.88rem; margin-bottom: 0.6rem; display: flex; align-items: center; gap: 0.6rem; color: #CBD5E1; }
+.footer-contact i { color: var(--primary-light); }
+.app-badges { display: flex; gap: 0.6rem; margin-top: 1.2rem; }
+.app-badge {
+  background: rgba(255,255,255,0.08); color: white; border: 1px solid rgba(255,255,255,0.12);
+  padding: 0.45rem 0.85rem; border-radius: 8px; font-size: 0.78rem; font-weight: 700;
+  display: inline-flex; align-items: center; gap: 0.4rem; transition: var(--transition);
+}
+.app-badge:hover { background: rgba(255,255,255,0.2); }
+.footer-bottom {
+  border-top: 1px solid rgba(255,255,255,0.08); padding-top: 2rem;
+  display: flex; justify-content: space-between; align-items: center; font-size: 0.85rem; color: #64748B;
+}
+.footer-bottom-links a { color: #64748B; margin-left: 1.2rem; }
+.footer-bottom-links a:hover { color: #CBD5E1; }
+
+/* -------- Floating Elements -------- */
+.floating-whatsapp {
+  position: fixed; bottom: 2rem; left: 2rem; z-index: 800;
+  width: 56px; height: 56px; border-radius: 50%;
+  background: #25D366; color: white;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.8rem; box-shadow: 0 10px 25px rgba(37, 211, 102, 0.4);
+  transition: var(--transition);
+}
+.floating-whatsapp:hover { transform: scale(1.1); box-shadow: 0 14px 30px rgba(37, 211, 102, 0.55); }
+.wa-tooltip {
+  position: absolute; left: 65px; background: var(--dark); color: white;
+  padding: 0.4rem 0.8rem; border-radius: 6px; font-size: 0.75rem; font-weight: 700;
+  white-space: nowrap; opacity: 0; pointer-events: none; transition: var(--transition);
+}
+.floating-whatsapp:hover .wa-tooltip { opacity: 1; transform: translateX(5px); }
+
+.scroll-top {
+  position: fixed; bottom: 2rem; right: 2rem; z-index: 800;
+  width: 48px; height: 48px; border-radius: 50%;
+  background: var(--dark); color: white; border: none;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.1rem; cursor: pointer; opacity: 0; visibility: hidden;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.2); transition: var(--transition);
+}
+.scroll-top.visible { opacity: 1; visibility: visible; }
+.scroll-top:hover { background: var(--primary); transform: translateY(-4px); }
+
+/* -------- Toast Notification -------- */
+.toast {
+  position: fixed; bottom: 5rem; right: 2rem; z-index: 2000;
+  background: var(--dark); color: white;
+  padding: 1rem 1.5rem; border-radius: var(--radius-sm);
+  box-shadow: 0 15px 40px rgba(0,0,0,0.3); font-weight: 600; font-size: 0.9rem;
+  display: flex; align-items: center; gap: 0.7rem;
+  transform: translateX(120%); transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  border-left: 4px solid var(--primary);
+}
+.toast.show { transform: translateX(0); }
+.toast.success { border-color: var(--accent3); }
+.toast.error { border-color: var(--secondary); }
+
+/* -------- Responsive -------- */
+@media (max-width: 1200px) {
+  .nav-links a { font-size: 0.82rem; padding: 0.4rem 0.7rem; }
+  .calc-layout { grid-template-columns: 1fr 350px; }
+}
+@media (max-width: 1024px) {
+  .calc-layout { grid-template-columns: 1fr; }
+  .calc-sidebar-col { position: static; }
+  .footer-grid { grid-template-columns: 1fr 1fr; }
+  .contact-grid { grid-template-columns: 1fr; }
+  .reviews-grid { grid-template-columns: 1fr; }
+}
+@media (max-width: 900px) {
+  .nav-links {
+    display: none; flex-direction: column;
+    position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(15, 23, 42, 0.98); backdrop-filter: blur(20px);
+    align-items: center; justify-content: center; gap: 1.2rem;
+    z-index: 850;
+  }
+  .nav-links.open { display: flex; }
+  .nav-links a { font-size: 1.2rem; padding: 0.7rem 1.8rem; }
+  .hamburger { display: flex; z-index: 860; position: relative; }
+  .hero { flex-direction: column; padding: 130px 5% 60px; text-align: center; }
+  .hero-visual { display: none; }
+  .hero-stats { justify-content: center; flex-wrap: wrap; gap: 1.5rem; margin: 0 auto; }
+  .hero-cta { justify-content: center; }
+  .steps-grid { grid-template-columns: 1fr; }
+  .calc-tools-row { flex-direction: column; align-items: stretch; }
+  .calc-search-box { max-width: 100%; }
+}
+@media (max-width: 480px) {
+  .services-grid, .pricing-plans, .gallery-grid { grid-template-columns: 1fr; }
+  .hero-title { font-size: 2.2rem; }
+  .service-select-grid { grid-template-columns: repeat(2, 1fr); }
+  .track-input-row { flex-direction: column; }
+  .track-input-row input { border-radius: 12px; }
+  .btn-row { flex-direction: column; }
+  .footer-grid { grid-template-columns: 1fr; gap: 2rem; }
+  .footer-bottom { flex-direction: column; gap: 0.8rem; text-align: center; }
+  .footer-bottom-links a { margin: 0 0.5rem; }
+}
+
+</style>
+</head>
+<body>
+
+<!-- ========== AUTH MODAL ========== -->
+<div id="auth-modal" class="modal-overlay hidden">
+  <div class="auth-modal-box">
+    <button class="modal-close" id="close-auth"><i class="fas fa-times"></i></button>
+    <div class="auth-tabs">
+      <button class="auth-tab active" id="tab-login" onclick="switchAuth('login')">Login</button>
+      <button class="auth-tab" id="tab-signup" onclick="switchAuth('signup')">Sign Up</button>
+    </div>
+    <!-- Login Form -->
+    <form id="login-form" class="auth-form" onsubmit="handleLogin(event)">
+      <h2>Welcome Back! 👋</h2>
+      <p class="auth-subtitle">Login to track your orders</p>
+      <div class="form-group">
+        <label><i class="fas fa-envelope"></i> Email</label>
+        <input type="email" id="login-email" placeholder="aap@email.com" required />
+      </div>
+      <div class="form-group">
+        <label><i class="fas fa-lock"></i> Password</label>
+        <input type="password" id="login-pass" placeholder="••••••••" required />
+      </div>
+      <button type="submit" class="btn-primary full-width">Login <i class="fas fa-arrow-right"></i></button>
+      <p class="auth-switch">Account nahi hai? <a href="#" onclick="switchAuth('signup')">Sign Up karo</a></p>
+    </form>
+    <!-- Signup Form -->
+    <form id="signup-form" class="auth-form hidden" onsubmit="handleSignup(event)">
+      <h2>Join WashEasy! 🎉</h2>
+      <p class="auth-subtitle">Free mein account banao</p>
+      <div class="form-group">
+        <label><i class="fas fa-user"></i> Full Name</label>
+        <input type="text" id="signup-name" placeholder="Apna naam" required />
+      </div>
+      <div class="form-group">
+        <label><i class="fas fa-phone"></i> Phone</label>
+        <input type="tel" id="signup-phone" placeholder="+91 9876543210" required />
+      </div>
+      <div class="form-group">
+        <label><i class="fas fa-envelope"></i> Email</label>
+        <input type="email" id="signup-email" placeholder="aap@email.com" required />
+      </div>
+      <div class="form-group">
+        <label><i class="fas fa-lock"></i> Password</label>
+        <input type="password" id="signup-pass" placeholder="••••••••" required />
+      </div>
+      <button type="submit" class="btn-primary full-width">Account Banao <i class="fas fa-arrow-right"></i></button>
+      <p class="auth-switch">Pehle se account hai? <a href="#" onclick="switchAuth('login')">Login karo</a></p>
+    </form>
+  </div>
+</div>
+
+<!-- ========== BOOKING MODAL ========== -->
+<div id="booking-modal" class="modal-overlay hidden">
+  <div class="booking-modal-box">
+    <button class="modal-close" id="close-booking"><i class="fas fa-times"></i></button>
+    <div class="booking-steps">
+      <div class="step active" id="bstep-1">
+        <span>1</span> Service
+      </div>
+      <div class="step-line"></div>
+      <div class="step" id="bstep-2">
+        <span>2</span> Schedule
+      </div>
+      <div class="step-line"></div>
+      <div class="step" id="bstep-3">
+        <span>3</span> Confirm
+      </div>
+    </div>
+    <!-- Step 1: Service Selection -->
+    <div id="booking-step-1" class="booking-page">
+      <h2>Service Chuniye 🧺</h2>
+      <div class="service-select-grid">
+        <div class="service-select-card" onclick="selectService(this, 'Wash & Fold', 50)" data-price="50">
+          <i class="fas fa-tshirt"></i>
+          <h4>Wash & Fold</h4>
+          <p>₹50/kg</p>
+        </div>
+        <div class="service-select-card" onclick="selectService(this, 'Dry Clean', 150)" data-price="150">
+          <i class="fas fa-wind"></i>
+          <h4>Dry Clean</h4>
+          <p>₹150/piece</p>
+        </div>
+        <div class="service-select-card" onclick="selectService(this, 'Ironing', 30)" data-price="30">
+          <i class="fas fa-temperature-high"></i>
+          <h4>Ironing</h4>
+          <p>₹30/piece</p>
+        </div>
+        <div class="service-select-card" onclick="selectService(this, 'Wash & Iron', 80)" data-price="80">
+          <i class="fas fa-star"></i>
+          <h4>Wash & Iron</h4>
+          <p>₹80/kg</p>
+        </div>
+        <div class="service-select-card" onclick="selectService(this, 'Blanket/Sofa', 300)" data-price="300">
+          <i class="fas fa-couch"></i>
+          <h4>Blanket/Sofa</h4>
+          <p>₹300/piece</p>
+        </div>
+        <div class="service-select-card" onclick="selectService(this, 'Premium Pack', 200)" data-price="200">
+          <i class="fas fa-crown"></i>
+          <h4>Premium Pack</h4>
+          <p>₹200/kg</p>
+        </div>
+      </div>
+      <div class="form-group">
+        <label><i class="fas fa-weight-hanging"></i> Quantity (kg / pieces)</label>
+        <input type="number" id="book-qty" placeholder="5" min="1" value="1" />
+      </div>
+      <button class="btn-primary full-width" onclick="goToStep(2)">Next <i class="fas fa-arrow-right"></i></button>
+    </div>
+    <!-- Step 2: Schedule -->
+    <div id="booking-step-2" class="booking-page hidden">
+      <h2>Schedule Karein 📅</h2>
+      <div class="form-group">
+        <label><i class="fas fa-calendar-alt"></i> Pickup Date</label>
+        <input type="date" id="book-date" />
+      </div>
+      <div class="form-group">
+        <label><i class="fas fa-clock"></i> Pickup Time</label>
+        <select id="book-time">
+          <option>9:00 AM – 11:00 AM</option>
+          <option>11:00 AM – 1:00 PM</option>
+          <option>1:00 PM – 3:00 PM</option>
+          <option>3:00 PM – 5:00 PM</option>
+          <option>5:00 PM – 7:00 PM</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label><i class="fas fa-map-marker-alt"></i> Pickup Address</label>
+        <textarea id="book-address" placeholder="Ghar ka pura address likhein..." rows="3"></textarea>
+      </div>
+      <div class="form-group">
+        <label><i class="fas fa-phone"></i> Contact Number</label>
+        <input type="tel" id="book-phone" placeholder="+91 9876543210" />
+      </div>
+      <div class="btn-row">
+        <button class="btn-outline" onclick="goToStep(1)"><i class="fas fa-arrow-left"></i> Back</button>
+        <button class="btn-primary" onclick="goToStep(3)">Next <i class="fas fa-arrow-right"></i></button>
+      </div>
+    </div>
+    <!-- Step 3: Confirm -->
+    <div id="booking-step-3" class="booking-page hidden">
+      <h2>Confirm Karein ✅</h2>
+      <div class="order-summary">
+        <h3>Order Summary</h3>
+        <div class="summary-row"><span>Service:</span><strong id="s-service">–</strong></div>
+        <div class="summary-row"><span>Quantity:</span><strong id="s-qty">–</strong></div>
+        <div class="summary-row"><span>Date:</span><strong id="s-date">–</strong></div>
+        <div class="summary-row"><span>Time:</span><strong id="s-time">–</strong></div>
+        <div class="summary-row"><span>Address:</span><strong id="s-addr">–</strong></div>
+        <div id="s-calc-breakdown" class="hidden">
+          <div class="summary-divider"></div>
+          <div class="summary-subhead"><i class="fas fa-tshirt"></i> Selected Items Breakdown:</div>
+          <div id="s-calc-items-list" class="s-calc-items-list"></div>
+          <div class="summary-row" id="s-coupon-row"><span>Discount:</span><strong id="s-coupon-discount" class="text-accent3">-₹0</strong></div>
+        </div>
+        <div class="summary-row total-row"><span>Estimated Total:</span><strong id="s-total">–</strong></div>
+      </div>
+      <div class="payment-methods">
+        <h3>Payment Method</h3>
+        <div class="pay-options">
+          <label class="pay-opt">
+            <input type="radio" name="payment" value="cod" checked />
+            <span><i class="fas fa-money-bill-wave"></i> Cash on Delivery</span>
+          </label>
+          <label class="pay-opt">
+            <input type="radio" name="payment" value="upi" />
+            <span><i class="fas fa-qrcode"></i> UPI / GPay</span>
+          </label>
+          <label class="pay-opt">
+            <input type="radio" name="payment" value="online" />
+            <span><i class="fas fa-credit-card"></i> Online Payment</span>
+          </label>
+        </div>
+      </div>
+      <div class="btn-row">
+        <button class="btn-outline" onclick="goToStep(2)"><i class="fas fa-arrow-left"></i> Back</button>
+        <button class="btn-primary" onclick="placeOrder()">Order Place Karein 🎉</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ========== ORDER SUCCESS MODAL ========== -->
+<div id="success-modal" class="modal-overlay hidden">
+  <div class="success-box">
+    <div class="success-icon">🎉</div>
+    <h2>Order Place Ho Gaya!</h2>
+    <p>Aapka order #<span id="order-id">WE12345</span> confirm ho gaya hai.<br/>Hum aapke kapde pickup karne aayenge!</p>
+    <div class="order-track-badge">
+      <i class="fas fa-truck"></i> Track karo: <strong id="track-status">Confirmed</strong>
+    </div>
+    <div class="btn-row" style="margin-top:1.2rem;">
+      <a href="track.html" class="btn-primary" style="display:inline-block; text-align:center;">Track Order Now</a>
+      <button class="btn-outline" onclick="closeSuccess()">Close</button>
+    </div>
+  </div>
+</div>
+
+<!-- ========== LIGHTBOX MODAL ========== -->
+<div id="gallery-lightbox" class="gallery-lightbox hidden" onclick="closeLightbox()">
+  <button class="lightbox-close" onclick="closeLightbox()"><i class="fas fa-times"></i></button>
+  <img id="lightbox-img" src="" alt="Full view" />
+</div>
+
+
+<!-- ========== NAVBAR ========== -->
+<nav class="navbar" id="navbar">
+  <div class="nav-container">
+    <a href="index.html" class="nav-logo">
+      <span class="logo-icon">🧺</span>
+      <span class="logo-text">Wash<span class="logo-accent">Easy</span></span>
+    </a>
+    <ul class="nav-links" id="nav-links">
+      <li><a href="index.html" class=""><i class="fas fa-home"></i> Home</a></li>
+      <li><a href="services.html" class="active"><i class="fas fa-tshirt"></i> Services</a></li>
+      <li><a href="pricing.html" class=""><i class="fas fa-tags"></i> Pricing</a></li>
+      <li><a href="calculator.html" class=""><i class="fas fa-calculator"></i> Calculator</a></li>
+      <li><a href="gallery.html" class=""><i class="fas fa-images"></i> Gallery</a></li>
+      <li><a href="track.html" class=""><i class="fas fa-truck"></i> Track Order</a></li>
+      <li><a href="contact.html" class=""><i class="fas fa-envelope"></i> Contact</a></li>
+    </ul>
+    <div class="nav-actions">
+      <div class="user-menu hidden" id="user-menu">
+        <button class="btn-user" id="user-btn" onclick="toggleUserDropdown()">
+          <i class="fas fa-user-circle"></i> <span id="user-name-display">User</span>
+          <i class="fas fa-chevron-down"></i>
+        </button>
+        <div class="user-dropdown hidden" id="user-dropdown">
+          <a href="track.html"><i class="fas fa-box"></i> My Orders</a>
+          <a href="#" onclick="logout()"><i class="fas fa-sign-out-alt"></i> Logout</a>
+        </div>
+      </div>
+      <button class="btn-outline-nav hidden" id="login-btn" onclick="openAuth()">
+        <i class="fas fa-user"></i> Login
+      </button>
+      <button class="btn-primary-nav" id="book-now-nav" onclick="openBooking()">
+        <i class="fas fa-calendar-plus"></i> Book Now
+      </button>
+      <button class="hamburger" id="hamburger" onclick="toggleMenu()">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+
+<section class="page-hero">
+  <div class="container">
+    <div class="page-hero-content">
+      <span class="hero-badge"><i class="fas fa-tshirt"></i> What We Offer</span>
+      <h1>Our Laundry Services 🧺</h1>
+      <p>Rozana ke kapde hon ya mehenge festive suits – hamare paas har kapde ka best solution hai.</p>
+    </div>
+  </div>
+</section>
+
+<section class="services" id="services">
+  <div class="container">
+    <div class="services-grid">
+      <div class="service-card">
+        <div class="service-icon"><i class="fas fa-tshirt"></i></div>
+        <h3>Wash & Fold</h3>
+        <p>Rozana ke kapdon ke liye best. Pure detergent mein dhulayi, hygienic dry, aur neatly fold karke pack.</p>
+        <ul class="service-features">
+          <li><i class="fas fa-check"></i> Everyday clothes ke liye</li>
+          <li><i class="fas fa-check"></i> Gentle detergent</li>
+          <li><i class="fas fa-check"></i> Neatly folded</li>
+        </ul>
+        <div class="service-price">₹50<span>/kg</span></div>
+        <button class="btn-service" onclick="openBooking('Wash & Fold', 50)">Book Karein</button>
+      </div>
+
+      <div class="service-card featured-service">
+        <div class="service-badge">Popular ⭐</div>
+        <div class="service-icon"><i class="fas fa-wind"></i></div>
+        <h3>Dry Cleaning</h3>
+        <p>Blazers, suits, sarees, lehengas ke liye premium chemical-free dry cleaning. Fabric safety 100% guaranteed.</p>
+        <ul class="service-features">
+          <li><i class="fas fa-check"></i> Suits, sarees, lehengas</li>
+          <li><i class="fas fa-check"></i> Stain treatment included</li>
+          <li><i class="fas fa-check"></i> Individual packaging</li>
+        </ul>
+        <div class="service-price">₹150<span>/piece</span></div>
+        <button class="btn-service" onclick="openBooking('Dry Clean', 150)">Book Karein</button>
+      </div>
+
+      <div class="service-card">
+        <div class="service-icon"><i class="fas fa-temperature-high"></i></div>
+        <h3>Steam Ironing</h3>
+        <p>Crinkle-free look! High pressure steam press se kapde bilkul showroom jaise chamak uthenge.</p>
+        <ul class="service-features">
+          <li><i class="fas fa-check"></i> High-pressure steam</li>
+          <li><i class="fas fa-check"></i> Hanger delivery available</li>
+          <li><i class="fas fa-check"></i> No fabric shine/burn</li>
+        </ul>
+        <div class="service-price">₹30<span>/piece</span></div>
+        <button class="btn-service" onclick="openBooking('Ironing', 30)">Book Karein</button>
+      </div>
+
+      <div class="service-card">
+        <div class="service-icon"><i class="fas fa-star"></i></div>
+        <h3>Wash & Iron</h3>
+        <p>Complete combo package! Kapde dhulein bhi aur wrinkle-free iron bhi ho kar aayein.</p>
+        <ul class="service-features">
+          <li><i class="fas fa-check"></i> Best for office wear</li>
+          <li><i class="fas fa-check"></i> Softener wash</li>
+          <li><i class="fas fa-check"></i> Ready to wear</li>
+        </ul>
+        <div class="service-price">₹80<span>/kg</span></div>
+        <button class="btn-service" onclick="openBooking('Wash & Iron', 80)">Book Karein</button>
+      </div>
+
+      <div class="service-card">
+        <div class="service-icon"><i class="fas fa-couch"></i></div>
+        <h3>Blanket & Sofa Cleaning</h3>
+        <p>Bhaari blankets, razai, cushions aur curtains ki deep cleaning with anti-bacterial treatment.</p>
+        <ul class="service-features">
+          <li><i class="fas fa-check"></i> Razai, blankets, dohar</li>
+          <li><i class="fas fa-check"></i> Anti-bacterial sanitization</li>
+          <li><i class="fas fa-check"></i> Odor removal</li>
+        </ul>
+        <div class="service-price">₹300<span>/piece</span></div>
+        <button class="btn-service" onclick="openBooking('Blanket/Sofa', 300)">Book Karein</button>
+      </div>
+
+      <div class="service-card">
+        <div class="service-icon"><i class="fas fa-crown"></i></div>
+        <h3>Premium Garment Care</h3>
+        <p>Designer clothes, silk, embroidery aur heavy work garments ke liye special hand wash & care.</p>
+        <ul class="service-features">
+          <li><i class="fas fa-check"></i> Designer & bridal wear</li>
+          <li><i class="fas fa-check"></i> Hand care & inspection</li>
+          <li><i class="fas fa-check"></i> Moisture-proof cover</li>
+        </ul>
+        <div class="service-price">₹200<span>/kg</span></div>
+        <button class="btn-service" onclick="openBooking('Premium Pack', 200)">Book Karein</button>
+      </div>
+    </div>
+
+    <!-- Quick CTA banner -->
+    <div style="margin-top: 3.5rem; text-align: center; background: white; padding: 2.5rem; border-radius: var(--radius); box-shadow: var(--shadow);">
+      <h3 style="font-size: 1.6rem; color: var(--dark); margin-bottom: 0.5rem;">Apne kapdon ka bill calculate karna chahte hain?</h3>
+      <p style="color: var(--text-light); margin-bottom: 1.5rem;">Hamare interactive calculator se exact kapde choose karein aur instant rate dekhein.</p>
+      <a href="calculator.html" class="btn-hero-primary" style="display: inline-block;"><i class="fas fa-calculator"></i> Open Price Calculator</a>
+    </div>
+  </div>
+</section>
+
+<!-- ========== FOOTER ========== -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="index.html" class="nav-logo">
+          <span class="logo-icon">🧺</span>
+          <span class="logo-text">Wash<span class="logo-accent">Easy</span></span>
+        </a>
+        <p>Professional laundry service aapke ghar tak. Trust, quality, aur speed – yahi hai WashEasy.</p>
+        <div class="social-links">
+          <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+          <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+          <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+          <a href="https://wa.me/919876543210" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+        </div>
+      </div>
+      <div class="footer-links">
+        <h4>Navigation Pages</h4>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="services.html">Services</a></li>
+          <li><a href="pricing.html">Pricing Plans</a></li>
+          <li><a href="calculator.html">Price Calculator</a></li>
+          <li><a href="gallery.html">Before & After</a></li>
+          <li><a href="track.html">Track Order</a></li>
+          <li><a href="contact.html">Contact Us</a></li>
+        </ul>
+      </div>
+      <div class="footer-links">
+        <h4>Services</h4>
+        <ul>
+          <li><a href="services.html">Wash & Fold</a></li>
+          <li><a href="services.html">Dry Cleaning</a></li>
+          <li><a href="services.html">Steam Ironing</a></li>
+          <li><a href="services.html">Blanket Wash</a></li>
+          <li><a href="services.html">Premium Pack</a></li>
+        </ul>
+      </div>
+      <div class="footer-contact">
+        <h4>Contact</h4>
+        <p><i class="fas fa-phone"></i> +91 98765 43210</p>
+        <p><i class="fas fa-envelope"></i> hello@washeasy.in</p>
+        <p><i class="fas fa-map-marker-alt"></i> New Delhi – 110024</p>
+        <div class="app-badges">
+          <a href="#" class="app-badge"><i class="fab fa-google-play"></i> Google Play</a>
+          <a href="#" class="app-badge"><i class="fab fa-apple"></i> App Store</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 WashEasy. Sabhi adhikar surakshit hain.</p>
+      <div class="footer-bottom-links">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Service</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- Floating WhatsApp Button -->
+<a href="https://wa.me/919876543210?text=Hello%20WashEasy!%20Mujhe%20laundry%20service%20chahiye."
+   target="_blank" class="floating-whatsapp" id="floating-wa" aria-label="WhatsApp">
+  <i class="fab fa-whatsapp"></i>
+  <span class="wa-tooltip">WhatsApp karo!</span>
+</a>
+
+<!-- Scroll to Top -->
+<button class="scroll-top" id="scroll-top" onclick="scrollToTop()" aria-label="Scroll to top">
+  <i class="fas fa-chevron-up"></i>
+</button>
+
+<script>
+// =====================================================
+// WashEasy – Main JavaScript
+// =====================================================
+
+// -------- State --------
+let currentUser = null;
+let selectedService = null;
+let selectedPrice = 0;
+let orders = JSON.parse(localStorage.getItem('we_orders') || '[]');
+let currentStep = 1;
+let currentCalculatorOrder = null;
+
+// -------- App Initialization --------
+function initApp() {
+  const preloader = document.getElementById('preloader');
+  if (preloader) preloader.remove();
+
+  // Check stored login
+  const stored = localStorage.getItem('we_user');
+  if (stored) {
+    try {
+      currentUser = JSON.parse(stored);
+      updateAuthUI();
+    } catch (e) {}
+  }
+
+  // Set min date for booking
+  const today = new Date().toISOString().split('T')[0];
+  const dateInput = document.getElementById('book-date');
+  if (dateInput) dateInput.min = today;
+
+  // Init scroll events
+  window.addEventListener('scroll', handleScroll);
+
+  // Animate sections on scroll
+  initIntersectionObserver();
+
+  // Initialize Price Calculator
+  if (typeof initPriceCalculator === 'function') {
+    initPriceCalculator();
+  }
+}
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initApp);
+} else {
+  initApp();
+}
+window.addEventListener('load', () => {
+  const p = document.getElementById('preloader');
+  if (p) p.remove();
+});
+
+// -------- Scroll Handling --------
+function handleScroll() {
+  const navbar = document.getElementById('navbar');
+  const scrollTop = document.getElementById('scroll-top');
+  const scrollY = window.scrollY;
+
+  if (navbar) navbar.classList.toggle('scrolled', scrollY > 80);
+  if (scrollTop) scrollTop.classList.toggle('visible', scrollY > 400);
+}
+
+function scrollToTop() {
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// -------- Intersection Observer for Animations --------
+function initIntersectionObserver() {
+  const items = document.querySelectorAll('.step-card, .service-card, .review-card, .pricing-card, .offer-card, .gallery-item');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.style.animationPlayState = 'running';
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+
+  items.forEach(item => {
+    item.style.animationPlayState = 'paused';
+    observer.observe(item);
+  });
+}
+
+// -------- Toast Notification --------
+function showToast(message, type = 'success') {
+  const existing = document.querySelector('.toast');
+  if (existing) existing.remove();
+
+  const toast = document.createElement('div');
+  toast.className = `toast ${type}`;
+  const icon = type === 'success' ? '✅' : type === 'error' ? '❌' : 'ℹ️';
+  toast.innerHTML = `<span>${icon}</span> ${message}`;
+  document.body.appendChild(toast);
+
+  requestAnimationFrame(() => {
+    toast.classList.add('show');
+  });
+
+  setTimeout(() => {
+    toast.classList.remove('show');
+    setTimeout(() => toast.remove(), 400);
+  }, 3500);
+}
+
+// -------- Auth Functions --------
+function openAuth() {
+  document.getElementById('auth-modal').classList.remove('hidden');
+  document.body.style.overflow = 'hidden';
+}
+
+function switchAuth(type) {
+  const loginForm = document.getElementById('login-form');
+  const signupForm = document.getElementById('signup-form');
+  const tabLogin = document.getElementById('tab-login');
+  const tabSignup = document.getElementById('tab-signup');
+
+  if (type === 'login') {
+    loginForm.classList.remove('hidden');
+    signupForm.classList.add('hidden');
+    tabLogin.classList.add('active');
+    tabSignup.classList.remove('active');
+  } else {
+    loginForm.classList.add('hidden');
+    signupForm.classList.remove('hidden');
+    tabLogin.classList.remove('active');
+    tabSignup.classList.add('active');
+  }
+}
+
+function handleLogin(e) {
+  e.preventDefault();
+  const email = document.getElementById('login-email').value;
+  const pass = document.getElementById('login-pass').value;
+
+  if (!email || !pass) {
+    showToast('Please fill all fields!', 'error');
+    return;
+  }
+
+  // Simulate login
+  currentUser = { email, name: email.split('@')[0], phone: '' };
+  localStorage.setItem('we_user', JSON.stringify(currentUser));
+  updateAuthUI();
+  closeModal('auth-modal');
+  showToast(`Welcome back, ${currentUser.name}! 👋`);
+}
+
+function handleSignup(e) {
+  e.preventDefault();
+  const name = document.getElementById('signup-name').value;
+  const phone = document.getElementById('signup-phone').value;
+  const email = document.getElementById('signup-email').value;
+  const pass = document.getElementById('signup-pass').value;
+
+  if (!name || !phone || !email || !pass) {
+    showToast('Please fill all fields!', 'error');
+    return;
+  }
+
+  currentUser = { name, phone, email };
+  localStorage.setItem('we_user', JSON.stringify(currentUser));
+  updateAuthUI();
+  closeModal('auth-modal');
+  showToast(`Welcome to WashEasy, ${name}! 🎉`);
+}
+
+function updateAuthUI() {
+  const loginBtn = document.getElementById('login-btn');
+  const userMenu = document.getElementById('user-menu');
+  const userName = document.getElementById('user-name-display');
+
+  if (currentUser) {
+    if (loginBtn) loginBtn.classList.add('hidden');
+    if (userMenu) userMenu.classList.remove('hidden');
+    if (userName) userName.textContent = currentUser.name;
+  } else {
+    if (loginBtn) loginBtn.classList.remove('hidden');
+    if (userMenu) userMenu.classList.add('hidden');
+  }
+}
+
+function toggleUserDropdown() {
+  const dropdown = document.getElementById('user-dropdown');
+  if (dropdown) dropdown.classList.toggle('hidden');
+}
+
+function showOrders() {
+  const dropdown = document.getElementById('user-dropdown');
+  if (dropdown) dropdown.classList.add('hidden');
+
+  if (!orders.length) {
+    showToast('Aapka koi order nahi hai abhi.', 'info');
+    return;
+  }
+
+  const lastOrder = orders[orders.length - 1];
+  const itemsText = lastOrder.calcDetails ? ` (${lastOrder.calcDetails.itemCount} items – ₹${lastOrder.total})` : ` (₹${lastOrder.total || 0})`;
+  showToast(`Last order: #${lastOrder.id} – ${lastOrder.service}${itemsText} [${lastOrder.status}]`, 'success');
+}
+
+function logout() {
+  currentUser = null;
+  localStorage.removeItem('we_user');
+  updateAuthUI();
+  const dropdown = document.getElementById('user-dropdown');
+  if (dropdown) dropdown.classList.add('hidden');
+  showToast('Aap logout ho gaye! 👋');
+}
+
+// -------- Booking Functions --------
+function openBooking(serviceName = null, price = null) {
+  currentCalculatorOrder = null;
+  const calcBreakdown = document.getElementById('s-calc-breakdown');
+  if (calcBreakdown) calcBreakdown.classList.add('hidden');
+
+  if (serviceName) {
+    selectedService = serviceName;
+    selectedPrice = price || 50;
+    // Highlight matching card if present
+    document.querySelectorAll('.service-select-card').forEach(c => {
+      const h4 = c.querySelector('h4');
+      if (h4 && h4.textContent.trim().toLowerCase() === serviceName.toLowerCase()) {
+        c.classList.add('selected');
+      } else {
+        c.classList.remove('selected');
+      }
+    });
+  } else {
+    selectedService = null;
+    selectedPrice = 0;
+    document.querySelectorAll('.service-select-card').forEach(c => c.classList.remove('selected'));
+  }
+
+  currentStep = 1;
+  updateBookingSteps();
+  document.getElementById('booking-modal').classList.remove('hidden');
+  document.body.style.overflow = 'hidden';
+}
+
+function selectService(el, name, price) {
+  document.querySelectorAll('.service-select-card').forEach(c => c.classList.remove('selected'));
+  el.classList.add('selected');
+  selectedService = name;
+  selectedPrice = price;
+  currentCalculatorOrder = null;
+}
+
+function goToStep(step) {
+  if (step === 2) {
+    if (!selectedService) {
+      showToast('Pehle ek service chuniye!', 'error');
+      return;
+    }
+  }
+  if (step === 3) {
+    const date = document.getElementById('book-date').value;
+    const addr = document.getElementById('book-address').value;
+    const phone = document.getElementById('book-phone').value;
+    if (!date || !addr || !phone) {
+      showToast('Sabhi fields fill karein!', 'error');
+      return;
+    }
+    // Populate summary
+    const qty = parseInt(document.getElementById('book-qty').value) || 1;
+    const time = document.getElementById('book-time').value;
+
+    document.getElementById('s-service').textContent = selectedService;
+    document.getElementById('s-date').textContent = date;
+    document.getElementById('s-time').textContent = time;
+    document.getElementById('s-addr').textContent = addr;
+
+    const calcBreakdown = document.getElementById('s-calc-breakdown');
+    const calcItemsList = document.getElementById('s-calc-items-list');
+
+    if (currentCalculatorOrder) {
+      document.getElementById('s-qty').textContent = `${currentCalculatorOrder.itemCount} Items (Calculated)`;
+      document.getElementById('s-total').textContent = `₹${currentCalculatorOrder.grandTotal.toLocaleString('en-IN')}`;
+      if (calcBreakdown && calcItemsList) {
+        calcBreakdown.classList.remove('hidden');
+        calcItemsList.innerHTML = currentCalculatorOrder.items.map(item => `
+          <div class="s-item-row">
+            <span>${item.qty}x ${item.name} <small style="color:var(--primary); font-weight:700;">(${item.serviceLabel})</small></span>
+            <strong>₹${item.totalPrice}</strong>
+          </div>
+        `).join('');
+
+        const couponRow = document.getElementById('s-coupon-row');
+        const couponDisc = document.getElementById('s-coupon-discount');
+        if (couponRow && couponDisc) {
+          if (currentCalculatorOrder.promoDiscount > 0) {
+            couponRow.style.display = 'flex';
+            couponDisc.textContent = `-₹${currentCalculatorOrder.promoDiscount}`;
+          } else {
+            couponRow.style.display = 'none';
+          }
+        }
+      }
+    } else {
+      const total = selectedPrice * qty;
+      document.getElementById('s-qty').textContent = qty;
+      document.getElementById('s-total').textContent = `₹${total.toLocaleString('en-IN')}`;
+      if (calcBreakdown) calcBreakdown.classList.add('hidden');
+    }
+  }
+  currentStep = step;
+  updateBookingSteps();
+}
+
+function updateBookingSteps() {
+  for (let i = 1; i <= 3; i++) {
+    const page = document.getElementById(`booking-step-${i}`);
+    const stepEl = document.getElementById(`bstep-${i}`);
+    if (page) page.classList.toggle('hidden', i !== currentStep);
+    if (stepEl) {
+      stepEl.classList.remove('active', 'done');
+      if (i === currentStep) stepEl.classList.add('active');
+      else if (i < currentStep) stepEl.classList.add('done');
+    }
+  }
+}
+
+function placeOrder() {
+  const orderId = 'WE' + Math.floor(10000 + Math.random() * 90000);
+  const payment = document.querySelector('input[name="payment"]:checked')?.value || 'cod';
+
+  const finalTotal = currentCalculatorOrder
+    ? currentCalculatorOrder.grandTotal
+    : (selectedPrice * (parseInt(document.getElementById('book-qty').value) || 1));
+
+  const finalQty = currentCalculatorOrder
+    ? currentCalculatorOrder.itemCount
+    : document.getElementById('book-qty').value;
+
+  const order = {
+    id: orderId,
+    service: selectedService,
+    qty: finalQty,
+    date: document.getElementById('book-date').value,
+    time: document.getElementById('book-time').value,
+    address: document.getElementById('book-address').value,
+    phone: document.getElementById('book-phone').value,
+    payment,
+    total: finalTotal,
+    calcDetails: currentCalculatorOrder ? { ...currentCalculatorOrder } : null,
+    status: 'Confirmed',
+    placedAt: new Date().toISOString()
+  };
+
+  orders.push(order);
+  localStorage.setItem('we_orders', JSON.stringify(orders));
+
+  closeModal('booking-modal');
+
+  // Show success
+  document.getElementById('order-id').textContent = orderId;
+  document.getElementById('track-status').textContent = 'Confirmed ✅';
+  document.getElementById('success-modal').classList.remove('hidden');
+
+  // Reset booking
+  selectedService = null;
+  selectedPrice = 0;
+  currentCalculatorOrder = null;
+  currentStep = 1;
+  document.querySelectorAll('.service-select-card').forEach(c => c.classList.remove('selected'));
+}
+
+function closeSuccess() {
+  closeModal('success-modal');
+}
+
+// -------- Order Tracking --------
+function trackOrder() {
+  const input = document.getElementById('track-input').value.trim().toUpperCase();
+  const result = document.getElementById('track-result');
+
+  if (!input) {
+    showToast('Order ID likhein!', 'error');
+    return;
+  }
+
+  // Find in local orders
+  const found = orders.find(o => o.id === input);
+
+  if (found || input.startsWith('WE')) {
+    result.classList.remove('hidden');
+    document.getElementById('tr-id').textContent = input;
+
+    // Simulate status based on found order or random demo
+    const statusMap = { 'Confirmed': 1, 'Picked Up': 2, 'Washing': 3, 'Packed': 4, 'Delivered': 5 };
+    const status = found ? found.status : 'Washing';
+    const doneSteps = statusMap[status] || 3;
+
+    document.getElementById('tr-badge').textContent = status;
+
+    for (let i = 1; i <= 5; i++) {
+      const step = document.getElementById(`tl-${i}`);
+      if (step) {
+        step.classList.remove('done', 'active');
+        if (i < doneSteps) step.classList.add('done');
+        else if (i === doneSteps) step.classList.add('active');
+      }
+    }
+    result.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  } else {
+    showToast('Order ID nahi mila. Sample: WE12345', 'error');
+  }
+}
+
+// -------- Contact Form --------
+function submitContact(e) {
+  e.preventDefault();
+  showToast('Aapka message send ho gaya! Hum jald hi contact karenge. 📩');
+  e.target.reset();
+}
+
+// -------- Modal Close --------
+function closeModal(id) {
+  document.getElementById(id).classList.add('hidden');
+  document.body.style.overflow = '';
+}
+
+// Close modals on overlay click
+document.addEventListener('DOMContentLoaded', () => {
+  ['auth-modal', 'booking-modal', 'success-modal'].forEach(id => {
+    const modal = document.getElementById(id);
+    if (modal) {
+      modal.addEventListener('click', (e) => {
+        if (e.target === modal) closeModal(id);
+      });
+    }
+  });
+
+  document.getElementById('close-auth')?.addEventListener('click', () => closeModal('auth-modal'));
+  document.getElementById('close-booking')?.addEventListener('click', () => closeModal('booking-modal'));
+
+  // Close user dropdown on outside click
+  document.addEventListener('click', (e) => {
+    const menu = document.getElementById('user-menu');
+    const dropdown = document.getElementById('user-dropdown');
+    if (menu && !menu.contains(e.target)) {
+      dropdown?.classList.add('hidden');
+    }
+  });
+});
+
+// -------- Mobile Menu --------
+function toggleMenu() {
+  const navLinks = document.getElementById('nav-links');
+  const hamburger = document.getElementById('hamburger');
+  navLinks.classList.toggle('open');
+  hamburger.classList.toggle('active');
+  document.body.style.overflow = navLinks.classList.contains('open') ? 'hidden' : '';
+}
+
+// Close menu on nav link click (mobile)
+document.querySelectorAll('.nav-links a').forEach(link => {
+  link.addEventListener('click', () => {
+    const navLinks = document.getElementById('nav-links');
+    const hamburger = document.getElementById('hamburger');
+    navLinks.classList.remove('open');
+    hamburger.classList.remove('active');
+    document.body.style.overflow = '';
+  });
+});
+
+// -------- Smooth Active Nav on Scroll --------
+window.addEventListener('scroll', () => {
+  const sections = ['home', 'services', 'pricing', 'calculator', 'gallery', 'reviews', 'contact'];
+  const navLinks = document.querySelectorAll('.nav-links a');
+  let current = '';
+
+  sections.forEach(id => {
+    const section = document.getElementById(id);
+    if (section && section.getBoundingClientRect().top < window.innerHeight / 2) {
+      current = id;
+    }
+  });
+
+  navLinks.forEach(link => {
+    link.classList.remove('active');
+    if (link.getAttribute('href') === `#${current}`) {
+      link.classList.add('active');
+    }
+  });
+});
+
+// -------- Counter Animation --------
+function animateCounters() {
+  const counters = document.querySelectorAll('.stat strong');
+  counters.forEach(counter => {
+    const target = counter.textContent;
+    const num = parseFloat(target.replace(/[^\d.]/g, ''));
+    if (!num || counter.dataset.animated) return;
+    counter.dataset.animated = true;
+
+    let current = 0;
+    const step = num / 60;
+    const timer = setInterval(() => {
+      current += step;
+      if (current >= num) {
+        counter.textContent = target;
+        clearInterval(timer);
+      } else {
+        const formatted = target.includes(',')
+          ? Math.floor(current).toLocaleString('en-IN') + '+'
+          : target.includes('/')
+            ? '₹' + Math.floor(current) + '/kg'
+            : Math.floor(current) + ' hrs';
+        counter.textContent = formatted;
+      }
+    }, 16);
+  });
+}
+
+const heroObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => { if (entry.isIntersecting) animateCounters(); });
+}, { threshold: 0.5 });
+const heroStats = document.querySelector('.hero-stats');
+if (heroStats) heroObserver.observe(heroStats);
+
+// -------- Gallery Lightbox --------
+function openLightbox(src, alt) {
+  const lb = document.getElementById('gallery-lightbox');
+  const img = document.getElementById('lightbox-img');
+  if (!lb || !img) return;
+  img.src = src;
+  img.alt = alt || 'Gallery image';
+  lb.classList.remove('hidden');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeLightbox() {
+  const lb = document.getElementById('gallery-lightbox');
+  if (lb) lb.classList.add('hidden');
+  document.body.style.overflow = '';
+}
+
+// Wire up gallery photo cards to the lightbox
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('.gallery-photo-card').forEach(card => {
+    card.addEventListener('click', () => {
+      const img = card.querySelector('.photo-ba-img');
+      if (img) openLightbox(img.src, img.alt);
+    });
+  });
+
+  // Close lightbox with Escape key
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeLightbox();
+  });
+});
+
+// =====================================================
+// INTERACTIVE LAUNDRY PRICE CALCULATOR
+// =====================================================
+
+const CALC_ITEMS = [
+  // Daily Wear
+  { id: 'shirt', name: 'Shirt / T-Shirt', icon: 'fa-tshirt', category: 'daily', prices: { wash_iron: 35, wash_fold: 20, dry_clean: 80, iron_only: 15 } },
+  { id: 'jeans', name: 'Jeans / Denim', icon: 'fa-socks', category: 'daily', prices: { wash_iron: 45, wash_fold: 30, dry_clean: 100, iron_only: 20 } },
+  { id: 'trousers', name: 'Trousers / Chinos', icon: 'fa-vest', category: 'daily', prices: { wash_iron: 40, wash_fold: 28, dry_clean: 90, iron_only: 20 } },
+  { id: 'kurta', name: 'Kurta / Pyjama', icon: 'fa-user-tie', category: 'daily', prices: { wash_iron: 40, wash_fold: 25, dry_clean: 100, iron_only: 20 } },
+  { id: 'shorts', name: 'Shorts / Trackpants', icon: 'fa-running', category: 'daily', prices: { wash_iron: 30, wash_fold: 20, dry_clean: 70, iron_only: 15 } },
+  
+  // Formal & Ethnic
+  { id: 'suit', name: 'Suit / Blazer (2-Pc)', icon: 'fa-user-tie', category: 'formal', prices: { wash_iron: 140, wash_fold: 100, dry_clean: 250, iron_only: 50 } },
+  { id: 'saree_cotton', name: 'Saree (Daily / Cotton)', icon: 'fa-female', category: 'formal', prices: { wash_iron: 70, wash_fold: 50, dry_clean: 160, iron_only: 35 } },
+  { id: 'saree_silk', name: 'Saree (Silk / Heavy)', icon: 'fa-gem', category: 'formal', prices: { wash_iron: 110, wash_fold: 80, dry_clean: 250, iron_only: 50 } },
+  { id: 'dress', name: 'Dress / Anarkali / Gown', icon: 'fa-spa', category: 'formal', prices: { wash_iron: 100, wash_fold: 70, dry_clean: 220, iron_only: 45 } },
+  { id: 'sherwani', name: 'Sherwani / Indo-Western', icon: 'fa-crown', category: 'formal', prices: { wash_iron: 200, wash_fold: 150, dry_clean: 400, iron_only: 90 } },
+
+  // Winter Wear
+  { id: 'jacket', name: 'Winter Jacket / Coat', icon: 'fa-snowflake', category: 'winter', prices: { wash_iron: 160, wash_fold: 120, dry_clean: 280, iron_only: 60 } },
+  { id: 'sweater', name: 'Sweater / Cardigan', icon: 'fa-mitten', category: 'winter', prices: { wash_iron: 75, wash_fold: 50, dry_clean: 150, iron_only: 30 } },
+  { id: 'hoodie', name: 'Hoodie / Sweatshirt', icon: 'fa-vest-patches', category: 'winter', prices: { wash_iron: 65, wash_fold: 45, dry_clean: 130, iron_only: 25 } },
+  { id: 'shawl', name: 'Shawl / Pashmina Stole', icon: 'fa-ribbon', category: 'winter', prices: { wash_iron: 70, wash_fold: 50, dry_clean: 180, iron_only: 35 } },
+
+  // Bedding & Household
+  { id: 'bedsheet_s', name: 'Bedsheet (Single)', icon: 'fa-bed', category: 'household', prices: { wash_iron: 85, wash_fold: 60, dry_clean: 150, iron_only: 30 } },
+  { id: 'bedsheet_d', name: 'Bedsheet (Double / King)', icon: 'fa-bed', category: 'household', prices: { wash_iron: 120, wash_fold: 90, dry_clean: 220, iron_only: 45 } },
+  { id: 'blanket_heavy', name: 'Blanket / Razai / Quilt', icon: 'fa-couch', category: 'household', prices: { wash_iron: 200, wash_fold: 150, dry_clean: 400, iron_only: 80 } },
+  { id: 'curtain', name: 'Curtain (Per Panel)', icon: 'fa-door-closed', category: 'household', prices: { wash_iron: 110, wash_fold: 80, dry_clean: 200, iron_only: 40 } },
+  { id: 'towel', name: 'Bath Towel / Bathrobe', icon: 'fa-bath', category: 'household', prices: { wash_iron: 35, wash_fold: 25, dry_clean: 80, iron_only: 15 } }
+];
+
+const SERVICE_LABELS = {
+  wash_iron: 'Wash & Iron',
+  wash_fold: 'Wash & Fold',
+  dry_clean: 'Dry Clean',
+  iron_only: 'Steam Iron Only'
+};
+
+// State
+let calcCategory = 'all';
+let calcSearchQuery = '';
+let calcGlobalDefaultService = 'wash_iron';
+let calcQuantities = {};
+let calcItemServices = {};
+let calcAppliedPromo = null;
+
+function initPriceCalculator() {
+  // Initialize default service for each item
+  CALC_ITEMS.forEach(item => {
+    if (!calcItemServices[item.id]) {
+      calcItemServices[item.id] = calcGlobalDefaultService;
+    }
+  });
+
+  renderCalcItems();
+  calculateBill();
+}
+
+function renderCalcItems() {
+  const grid = document.getElementById('calc-items-grid');
+  const noItems = document.getElementById('calc-no-items');
+  if (!grid) return;
+
+  const query = calcSearchQuery.trim().toLowerCase();
+  const filtered = CALC_ITEMS.filter(item => {
+    const matchCategory = calcCategory === 'all' || item.category === calcCategory;
+    const matchSearch = !query || item.name.toLowerCase().includes(query) || item.category.toLowerCase().includes(query);
+    return matchCategory && matchSearch;
+  });
+
+  if (filtered.length === 0) {
+    grid.innerHTML = '';
+    if (noItems) noItems.classList.remove('hidden');
+    return;
+  }
+
+  if (noItems) noItems.classList.add('hidden');
+
+  grid.innerHTML = filtered.map(item => {
+    const qty = calcQuantities[item.id] || 0;
+    const service = calcItemServices[item.id] || calcGlobalDefaultService;
+    const price = item.prices[service] || item.prices.wash_iron;
+    const hasQtyClass = qty > 0 ? 'has-qty' : '';
+
+    return `
+      <div class="calc-item-card ${hasQtyClass}" id="calc-card-${item.id}">
+        <div class="calc-card-top">
+          <div class="calc-item-icon">
+            <i class="fas ${item.icon}"></i>
+          </div>
+          <div class="calc-item-info">
+            <h4 class="calc-item-title">${item.name}</h4>
+            <span class="calc-item-category">${formatCategoryName(item.category)}</span>
+          </div>
+        </div>
+
+        <select class="calc-service-select" onchange="changeItemService('${item.id}', this.value)" aria-label="Service for ${item.name}">
+          <option value="wash_iron" ${service === 'wash_iron' ? 'selected' : ''}>🧺 Wash & Iron (₹${item.prices.wash_iron})</option>
+          <option value="wash_fold" ${service === 'wash_fold' ? 'selected' : ''}>🧼 Wash & Fold (₹${item.prices.wash_fold})</option>
+          <option value="dry_clean" ${service === 'dry_clean' ? 'selected' : ''}>✨ Dry Clean (₹${item.prices.dry_clean})</option>
+          <option value="iron_only" ${service === 'iron_only' ? 'selected' : ''}>⚡ Iron Only (₹${item.prices.iron_only})</option>
+        </select>
+
+        <div class="calc-card-bottom">
+          <div class="calc-price-wrap">
+            <span class="calc-price-value" id="price-display-${item.id}">₹${price}</span>
+            <span class="calc-price-sub">per item</span>
+          </div>
+          <div class="calc-stepper">
+            <button class="calc-step-btn" onclick="adjustItemQty('${item.id}', -1)" aria-label="Decrease quantity">
+              <i class="fas fa-minus"></i>
+            </button>
+            <span class="calc-step-val" id="qty-val-${item.id}">${qty}</span>
+            <button class="calc-step-btn" onclick="adjustItemQty('${item.id}', 1)" aria-label="Increase quantity">
+              <i class="fas fa-plus"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    `;
+  }).join('');
+}
+
+function formatCategoryName(cat) {
+  const map = {
+    daily: 'Daily Wear',
+    formal: 'Formal & Ethnic',
+    winter: 'Winter Care',
+    household: 'Home & Bedding'
+  };
+  return map[cat] || cat;
+}
+
+function filterCalcCategory(cat) {
+  calcCategory = cat;
+  document.querySelectorAll('.calc-cat-btn').forEach(btn => {
+    btn.classList.toggle('active', btn.dataset.category === cat);
+  });
+  renderCalcItems();
+}
+
+function filterCalcSearch(val) {
+  calcSearchQuery = val;
+  renderCalcItems();
+}
+
+function setGlobalDefaultService(serviceKey) {
+  calcGlobalDefaultService = serviceKey;
+  CALC_ITEMS.forEach(item => {
+    // Only update items that currently haven't been customized or update all
+    calcItemServices[item.id] = serviceKey;
+  });
+  renderCalcItems();
+  calculateBill();
+  showToast(`Default service changed to: ${SERVICE_LABELS[serviceKey]}`);
+}
+
+function changeItemService(itemId, newService) {
+  calcItemServices[itemId] = newService;
+  const item = CALC_ITEMS.find(i => i.id === itemId);
+  if (item) {
+    const priceEl = document.getElementById(`price-display-${itemId}`);
+    if (priceEl) {
+      priceEl.textContent = `₹${item.prices[newService]}`;
+    }
+  }
+  calculateBill();
+}
+
+function adjustItemQty(itemId, delta) {
+  const current = calcQuantities[itemId] || 0;
+  const next = Math.max(0, current + delta);
+  calcQuantities[itemId] = next;
+
+  const qtyEl = document.getElementById(`qty-val-${itemId}`);
+  if (qtyEl) qtyEl.textContent = next;
+
+  const card = document.getElementById(`calc-card-${itemId}`);
+  if (card) {
+    card.classList.toggle('has-qty', next > 0);
+  }
+
+  calculateBill();
+}
+
+function calculateBill() {
+  let subtotal = 0;
+  let totalItems = 0;
+  const selectedItemsData = [];
+
+  CALC_ITEMS.forEach(item => {
+    const qty = calcQuantities[item.id] || 0;
+    if (qty > 0) {
+      const service = calcItemServices[item.id] || calcGlobalDefaultService;
+      const unitPrice = item.prices[service] || item.prices.wash_iron;
+      const itemTotal = unitPrice * qty;
+
+      subtotal += itemTotal;
+      totalItems += qty;
+
+      selectedItemsData.push({
+        id: item.id,
+        name: item.name,
+        serviceKey: service,
+        serviceLabel: SERVICE_LABELS[service] || 'Wash & Iron',
+        unitPrice,
+        qty,
+        totalPrice: itemTotal
+      });
+    }
+  });
+
+  // Delivery calculation
+  const freeThreshold = 199;
+  let deliveryFee = 0;
+  let isFreeDelivery = false;
+
+  if (totalItems === 0) {
+    deliveryFee = 0;
+    isFreeDelivery = true;
+  } else if (subtotal >= freeThreshold) {
+    deliveryFee = 0;
+    isFreeDelivery = true;
+  } else {
+    deliveryFee = 40;
+    isFreeDelivery = false;
+  }
+
+  // Promo handling (FREESHIP)
+  if (calcAppliedPromo && calcAppliedPromo.code === 'FREESHIP') {
+    deliveryFee = 0;
+    isFreeDelivery = true;
+  }
+
+  // Delivery Progress Bar
+  const trackerFill = document.getElementById('tracker-fill');
+  const trackerText = document.getElementById('tracker-text');
+  if (trackerFill && trackerText) {
+    if (totalItems === 0) {
+      trackerFill.style.width = '0%';
+      trackerText.innerHTML = `Add <strong>₹${freeThreshold}</strong> more for <strong>FREE Delivery</strong>`;
+    } else if (subtotal >= freeThreshold) {
+      trackerFill.style.width = '100%';
+      trackerText.innerHTML = `🎉 Badhaai ho! <strong>FREE Delivery</strong> unlocked!`;
+    } else {
+      const remaining = freeThreshold - subtotal;
+      const percent = Math.min(100, Math.round((subtotal / freeThreshold) * 100));
+      trackerFill.style.width = `${percent}%`;
+      trackerText.innerHTML = `Bas <strong>₹${remaining}</strong> aur add karein for <strong>FREE Delivery</strong>!`;
+    }
+  }
+
+  // Add-ons
+  const expressChecked = document.getElementById('calc-addon-express')?.checked || false;
+  const softenerChecked = document.getElementById('calc-addon-softener')?.checked || false;
+  let addonsTotal = 0;
+  if (expressChecked) addonsTotal += 50;
+  if (softenerChecked) addonsTotal += 20;
+
+  // Promo discount calculation
+  let promoDiscount = 0;
+  if (calcAppliedPromo && totalItems > 0) {
+    if (calcAppliedPromo.code === 'FIRST50') {
+      if (subtotal >= 150) {
+        promoDiscount = 50;
+      } else {
+        promoDiscount = 0;
+      }
+    } else if (calcAppliedPromo.code === 'CLEAN20') {
+      if (subtotal >= 300) {
+        promoDiscount = Math.min(120, Math.round(subtotal * 0.20));
+      } else {
+        promoDiscount = 0;
+      }
+    }
+  }
+
+  const grandTotal = Math.max(0, subtotal + deliveryFee + addonsTotal - promoDiscount);
+
+  // Store in global calculator order state
+  currentCalculatorOrder = {
+    items: selectedItemsData,
+    itemCount: totalItems,
+    subtotal,
+    deliveryFee,
+    addonsTotal,
+    addons: [
+      ...(expressChecked ? ['12-Hour Express (+₹50)'] : []),
+      ...(softenerChecked ? ['Eco Fabric Softener (+₹20)'] : [])
+    ],
+    promoCode: calcAppliedPromo ? calcAppliedPromo.code : null,
+    promoDiscount,
+    grandTotal
+  };
+
+  // Update DOM displays
+  const itemCountEl = document.getElementById('calc-item-count');
+  if (itemCountEl) itemCountEl.textContent = `${totalItems} ${totalItems === 1 ? 'item' : 'items'} added`;
+
+  const subtotalEl = document.getElementById('bill-subtotal');
+  if (subtotalEl) subtotalEl.textContent = `₹${subtotal.toLocaleString('en-IN')}`;
+
+  const deliveryEl = document.getElementById('bill-delivery');
+  if (deliveryEl) {
+    if (isFreeDelivery || deliveryFee === 0) {
+      deliveryEl.textContent = 'FREE';
+      deliveryEl.className = 'text-accent3';
+    } else {
+      deliveryEl.textContent = `₹${deliveryFee}`;
+      deliveryEl.className = '';
+    }
+  }
+
+  const rowAddon = document.getElementById('row-addon-total');
+  const billAddons = document.getElementById('bill-addons');
+  if (rowAddon && billAddons) {
+    if (addonsTotal > 0) {
+      rowAddon.classList.remove('hidden');
+      billAddons.textContent = `+₹${addonsTotal}`;
+    } else {
+      rowAddon.classList.add('hidden');
+    }
+  }
+
+  const rowPromo = document.getElementById('row-promo-discount');
+  const billDiscount = document.getElementById('bill-discount');
+  const billCouponTag = document.getElementById('bill-coupon-tag');
+  if (rowPromo && billDiscount && billCouponTag) {
+    if (promoDiscount > 0) {
+      rowPromo.classList.remove('hidden');
+      billCouponTag.textContent = calcAppliedPromo.code;
+      billDiscount.textContent = `-₹${promoDiscount}`;
+    } else {
+      rowPromo.classList.add('hidden');
+    }
+  }
+
+  const grandTotalEl = document.getElementById('bill-grand-total');
+  if (grandTotalEl) grandTotalEl.textContent = `₹${grandTotal.toLocaleString('en-IN')}`;
+
+  const bookTag = document.getElementById('book-price-tag');
+  if (bookTag) bookTag.textContent = `₹${grandTotal.toLocaleString('en-IN')}`;
+
+  // Render selected items list
+  renderSelectedList(selectedItemsData);
+}
+
+function renderSelectedList(items) {
+  const listEl = document.getElementById('calc-selected-list');
+  if (!listEl) return;
+
+  if (items.length === 0) {
+    listEl.innerHTML = `
+      <div class="calc-empty-hint" id="calc-empty-hint">
+        <div class="empty-basket-icon">🧺</div>
+        <p>Aapka basket abhi khali hai.</p>
+        <span>Items ke <strong>+</strong> button par click karein</span>
+      </div>
+    `;
+    return;
+  }
+
+  listEl.innerHTML = items.map(item => `
+    <div class="calc-selected-row">
+      <div class="row-item-meta">
+        <span class="row-item-name">${item.name}</span>
+        <span class="row-item-service">${item.qty} × ${item.serviceLabel}</span>
+      </div>
+      <div class="row-item-actions">
+        <span class="row-item-price">₹${item.totalPrice}</span>
+        <button class="row-remove-btn" onclick="adjustItemQty('${item.id}', -${item.qty})" title="Remove item" aria-label="Remove ${item.name}">
+          <i class="fas fa-times-circle"></i>
+        </button>
+      </div>
+    </div>
+  `).join('');
+}
+
+function applyPromoCode() {
+  const input = document.getElementById('calc-promo-input');
+  if (!input) return;
+  const code = input.value.trim().toUpperCase();
+  processPromoCode(code);
+}
+
+function applyQuickPromo(code) {
+  const input = document.getElementById('calc-promo-input');
+  if (input) input.value = code;
+  processPromoCode(code);
+}
+
+function processPromoCode(code) {
+  const feedback = document.getElementById('promo-feedback');
+  if (!code) {
+    showFeedback('Koi coupon code enter karein!', 'error');
+    return;
+  }
+
+  const subtotal = currentCalculatorOrder ? currentCalculatorOrder.subtotal : 0;
+
+  if (code === 'FIRST50') {
+    if (subtotal < 150) {
+      showFeedback('FIRST50 coupon ke liye minimum ₹150 ke clothes hone chahiye!', 'error');
+      return;
+    }
+    calcAppliedPromo = { code: 'FIRST50', discount: 50 };
+    showFeedback('Coupon FIRST50 apply ho gaya! ₹50 OFF mil gaya 🎉', 'success');
+  } else if (code === 'CLEAN20') {
+    if (subtotal < 300) {
+      showFeedback('CLEAN20 coupon ke liye minimum ₹300 ke clothes hone chahiye!', 'error');
+      return;
+    }
+    calcAppliedPromo = { code: 'CLEAN20', percent: 20 };
+    showFeedback('Coupon CLEAN20 apply ho gaya! 20% OFF 🎉', 'success');
+  } else if (code === 'FREESHIP') {
+    calcAppliedPromo = { code: 'FREESHIP' };
+    showFeedback('Coupon FREESHIP apply ho gaya! Delivery charge bilkul free 🎉', 'success');
+  } else {
+    showFeedback('Galat coupon code! Try FIRST50, CLEAN20 ya FREESHIP.', 'error');
+    return;
+  }
+
+  calculateBill();
+}
+
+function showFeedback(msg, type) {
+  const feedback = document.getElementById('promo-feedback');
+  if (!feedback) return;
+  feedback.textContent = msg;
+  feedback.className = `promo-feedback ${type}`;
+  feedback.classList.remove('hidden');
+}
+
+function resetCalculator() {
+  calcQuantities = {};
+  calcAppliedPromo = null;
+  const promoInput = document.getElementById('calc-promo-input');
+  if (promoInput) promoInput.value = '';
+  const feedback = document.getElementById('promo-feedback');
+  if (feedback) feedback.classList.add('hidden');
+
+  const express = document.getElementById('calc-addon-express');
+  if (express) express.checked = false;
+  const softener = document.getElementById('calc-addon-softener');
+  if (softener) softener.checked = false;
+
+  renderCalcItems();
+  calculateBill();
+  showToast('Calculator reset ho gaya! 🧺');
+}
+
+function bookFromCalculator() {
+  if (!currentCalculatorOrder || currentCalculatorOrder.itemCount === 0) {
+    showToast('Pehle kuch kapde add karein! (+ button dabayein)', 'error');
+    return;
+  }
+
+  selectedService = `Custom Laundry (${currentCalculatorOrder.itemCount} Items)`;
+  selectedPrice = currentCalculatorOrder.grandTotal;
+
+  // Jump directly to step 2 (scheduling)
+  currentStep = 2;
+  updateBookingSteps();
+  document.getElementById('booking-modal').classList.remove('hidden');
+  document.body.style.overflow = 'hidden';
+  showToast(`Schedule karein aapka ₹${currentCalculatorOrder.grandTotal} ka laundry order! 🧺`);
+}
+
+</script>
+</body>
+</html>
+
