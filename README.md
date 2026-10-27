@@ -120,3 +120,4 @@ The server supports **Mongoose MongoDB Schemas** (`models/User.js`, `models/Orde
 - `POST /api/orders` – Place order (persisted to MongoDB)
 - `GET /api/orders/:id` – Track live order timeline (Confirmed, Picked Up, Washing, Packed, Delivered)
 - `GET /api/orders` – List all orders
+
