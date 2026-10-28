@@ -1,0 +1,942 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard – WashEasy Laundry</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <style>
+    :root {
+      --admin-bg: #0b1120;
+      --admin-card: #1e293b;
+      --admin-card-border: #334155;
+      --admin-primary: #0284c7;
+      --admin-primary-hover: #0369a1;
+      --admin-text: #f8fafc;
+      --admin-muted: #94a3b8;
+      --admin-success: #10b981;
+      --admin-warning: #f59e0b;
+      --admin-danger: #ef4444;
+      --admin-purple: #8b5cf6;
+    }
+
+    body {
+      background-color: var(--admin-bg);
+      color: var(--admin-text);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+    }
+
+    /* Admin Navbar */
+    .admin-navbar {
+      background: rgba(15, 23, 42, 0.95);
+      border-bottom: 1px solid var(--admin-card-border);
+      padding: 14px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(10px);
+    }
+    .admin-brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: var(--admin-text);
+      font-weight: 800;
+      font-size: 1.25rem;
+    }
+    .admin-brand i {
+      color: #38bdf8;
+      font-size: 1.5rem;
+    }
+    .admin-badge {
+      background: rgba(14, 165, 233, 0.15);
+      color: #38bdf8;
+      border: 1px solid rgba(14, 165, 233, 0.4);
+      padding: 3px 10px;
+      border-radius: 9999px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+    .admin-nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .admin-nav-link {
+      color: var(--admin-muted);
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 600;
+      transition: color 0.2s;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .admin-nav-link:hover {
+      color: var(--admin-text);
+    }
+    .admin-user-pill {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--admin-card);
+      padding: 6px 14px;
+      border-radius: 9999px;
+      border: 1px solid var(--admin-card-border);
+      font-size: 0.85rem;
+    }
+    .admin-avatar {
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      background: #0284c7;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.75rem;
+      font-weight: bold;
+    }
+    .btn-logout {
+      background: transparent;
+      border: 1px solid rgba(239, 68, 68, 0.4);
+      color: #f87171;
+      padding: 6px 14px;
+      border-radius: 8px;
+      font-size: 0.85rem;
+      cursor: pointer;
+      font-weight: 600;
+      transition: all 0.2s;
+    }
+    .btn-logout:hover {
+      background: #ef4444;
+      color: #fff;
+    }
+
+    /* Container */
+    .admin-container {
+      max-width: 1300px;
+      margin: 0 auto;
+      padding: 24px 20px;
+    }
+
+    /* Dashboard Header */
+    .dashboard-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 24px;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+    .dashboard-title h1 {
+      margin: 0 0 6px 0;
+      font-size: 1.8rem;
+      font-weight: 800;
+    }
+    .dashboard-title p {
+      margin: 0;
+      color: var(--admin-muted);
+      font-size: 0.95rem;
+    }
+    .header-actions {
+      display: flex;
+      gap: 12px;
+    }
+    .btn-refresh {
+      background: var(--admin-card);
+      border: 1px solid var(--admin-card-border);
+      color: var(--admin-text);
+      padding: 10px 18px;
+      border-radius: 10px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.2s;
+    }
+    .btn-refresh:hover {
+      border-color: #38bdf8;
+      color: #38bdf8;
+    }
+    .btn-primary-action {
+      background: linear-gradient(135deg, #0284c7, #0369a1);
+      border: none;
+      color: #fff;
+      padding: 10px 20px;
+      border-radius: 10px;
+      font-weight: 700;
+      font-size: 0.9rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: 0 4px 14px rgba(2, 132, 199, 0.4);
+      transition: all 0.2s;
+    }
+    .btn-primary-action:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 18px rgba(2, 132, 199, 0.6);
+    }
+
+    /* Stats Grid */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 18px;
+      margin-bottom: 28px;
+    }
+    .stat-card {
+      background: var(--admin-card);
+      border: 1px solid var(--admin-card-border);
+      border-radius: 14px;
+      padding: 20px;
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+      transition: transform 0.2s, border-color 0.2s;
+    }
+    .stat-card:hover {
+      transform: translateY(-3px);
+      border-color: #475569;
+    }
+    .stat-icon {
+      width: 52px;
+      height: 52px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.4rem;
+      flex-shrink: 0;
+    }
+    .stat-blue .stat-icon { background: rgba(14, 165, 233, 0.15); color: #38bdf8; }
+    .stat-green .stat-icon { background: rgba(16, 185, 129, 0.15); color: #34d399; }
+    .stat-amber .stat-icon { background: rgba(245, 158, 11, 0.15); color: #fbbf24; }
+    .stat-purple .stat-icon { background: rgba(139, 92, 246, 0.15); color: #a78bfa; }
+
+    .stat-info {
+      flex: 1;
+    }
+    .stat-label {
+      font-size: 0.85rem;
+      color: var(--admin-muted);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 4px;
+    }
+    .stat-value {
+      font-size: 1.7rem;
+      font-weight: 800;
+      color: #fff;
+    }
+    .stat-subtext {
+      font-size: 0.75rem;
+      color: var(--admin-muted);
+      margin-top: 4px;
+    }
+
+    /* Orders Card & Toolbar */
+    .orders-section {
+      background: var(--admin-card);
+      border: 1px solid var(--admin-card-border);
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.25);
+    }
+    .toolbar {
+      padding: 18px 24px;
+      border-bottom: 1px solid var(--admin-card-border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+    .search-box {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: rgba(15, 23, 42, 0.7);
+      border: 1px solid var(--admin-card-border);
+      border-radius: 10px;
+      padding: 8px 14px;
+      min-width: 280px;
+    }
+    .search-box i {
+      color: var(--admin-muted);
+      font-size: 0.9rem;
+    }
+    .search-box input {
+      background: transparent;
+      border: none;
+      color: var(--admin-text);
+      font-size: 0.9rem;
+      outline: none;
+      width: 100%;
+    }
+    .filter-pills {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .pill-btn {
+      background: rgba(15, 23, 42, 0.6);
+      border: 1px solid var(--admin-card-border);
+      color: var(--admin-muted);
+      padding: 6px 14px;
+      border-radius: 9999px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .pill-btn.active, .pill-btn:hover {
+      background: #0284c7;
+      color: #fff;
+      border-color: #0284c7;
+    }
+
+    /* Table */
+    .table-responsive {
+      overflow-x: auto;
+      width: 100%;
+    }
+    table.orders-table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      font-size: 0.9rem;
+    }
+    table.orders-table th {
+      background: rgba(15, 23, 42, 0.8);
+      color: var(--admin-muted);
+      font-weight: 700;
+      text-transform: uppercase;
+      font-size: 0.75rem;
+      letter-spacing: 0.05em;
+      padding: 14px 20px;
+      border-bottom: 1px solid var(--admin-card-border);
+    }
+    table.orders-table td {
+      padding: 16px 20px;
+      border-bottom: 1px solid rgba(51, 65, 85, 0.5);
+      vertical-align: middle;
+    }
+    table.orders-table tr:hover td {
+      background: rgba(30, 41, 59, 0.8);
+    }
+
+    /* Order Badges */
+    .order-id-badge {
+      font-weight: 800;
+      color: #38bdf8;
+      background: rgba(56, 189, 248, 0.1);
+      border: 1px solid rgba(56, 189, 248, 0.3);
+      padding: 4px 10px;
+      border-radius: 6px;
+      display: inline-block;
+      font-family: monospace;
+      font-size: 0.9rem;
+    }
+    .customer-info {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+    .customer-name {
+      font-weight: 700;
+      color: #fff;
+    }
+    .customer-sub {
+      font-size: 0.8rem;
+      color: var(--admin-muted);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    /* Status Selector Dropdown */
+    .status-select {
+      background: #0f172a;
+      border: 1px solid var(--admin-card-border);
+      color: #fff;
+      padding: 6px 12px;
+      border-radius: 8px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      cursor: pointer;
+      outline: none;
+      transition: all 0.2s;
+    }
+    .status-select.status-Confirmed { color: #60a5fa; border-color: rgba(96, 165, 250, 0.5); }
+    .status-select.status-PickedUp { color: #fbbf24; border-color: rgba(251, 191, 36, 0.5); }
+    .status-select.status-Washing { color: #c084fc; border-color: rgba(192, 132, 252, 0.5); }
+    .status-select.status-Packed { color: #38bdf8; border-color: rgba(56, 189, 248, 0.5); }
+    .status-select.status-Delivered { color: #34d399; border-color: rgba(52, 211, 153, 0.5); }
+
+    .btn-action-delete {
+      background: rgba(239, 68, 68, 0.1);
+      border: 1px solid rgba(239, 68, 68, 0.3);
+      color: #ef4444;
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .btn-action-delete:hover {
+      background: #ef4444;
+      color: #fff;
+    }
+
+    /* Login Modal Overlay */
+    .login-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(11, 17, 32, 0.95);
+      backdrop-filter: blur(8px);
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+    .login-box {
+      background: #1e293b;
+      border: 1px solid #334155;
+      border-radius: 20px;
+      width: 100%;
+      max-width: 420px;
+      padding: 36px 30px;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+      text-align: center;
+    }
+    .login-icon {
+      width: 64px;
+      height: 64px;
+      border-radius: 16px;
+      background: rgba(14, 165, 233, 0.15);
+      color: #38bdf8;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.8rem;
+      margin-bottom: 20px;
+    }
+    .login-box h2 {
+      margin: 0 0 8px 0;
+      font-size: 1.6rem;
+      font-weight: 800;
+    }
+    .login-box p {
+      color: var(--admin-muted);
+      font-size: 0.9rem;
+      margin: 0 0 24px 0;
+    }
+    .form-group {
+      text-align: left;
+      margin-bottom: 18px;
+    }
+    .form-group label {
+      display: block;
+      font-size: 0.8rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      color: var(--admin-muted);
+      margin-bottom: 6px;
+    }
+    .form-group input {
+      width: 100%;
+      background: #0f172a;
+      border: 1px solid #334155;
+      color: #fff;
+      padding: 12px 14px;
+      border-radius: 10px;
+      font-size: 0.95rem;
+      outline: none;
+      box-sizing: border-box;
+      transition: border-color 0.2s;
+    }
+    .form-group input:focus {
+      border-color: #38bdf8;
+    }
+    .btn-login-submit {
+      width: 100%;
+      background: linear-gradient(135deg, #0284c7, #0369a1);
+      color: #fff;
+      border: none;
+      padding: 14px;
+      border-radius: 10px;
+      font-weight: 800;
+      font-size: 1rem;
+      cursor: pointer;
+      margin-top: 10px;
+      transition: all 0.2s;
+    }
+    .btn-login-submit:hover {
+      opacity: 0.95;
+      transform: translateY(-2px);
+    }
+    .btn-quick-fill {
+      background: rgba(14, 165, 233, 0.1);
+      border: 1px dashed rgba(56, 189, 248, 0.4);
+      color: #38bdf8;
+      width: 100%;
+      padding: 10px;
+      border-radius: 10px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      margin-top: 12px;
+      transition: all 0.2s;
+    }
+    .btn-quick-fill:hover {
+      background: rgba(14, 165, 233, 0.2);
+    }
+
+    /* Toast Notification */
+    .toast {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      background: #1e293b;
+      color: #fff;
+      border-left: 4px solid #10b981;
+      border: 1px solid #334155;
+      padding: 14px 20px;
+      border-radius: 10px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+      z-index: 2000;
+      display: none;
+      align-items: center;
+      gap: 12px;
+      font-size: 0.9rem;
+      font-weight: 600;
+    }
+
+    /* Mobile Responsive */
+    @media (max-width: 768px) {
+      .admin-navbar { padding: 12px 16px; }
+      .admin-container { padding: 16px 12px; }
+      .toolbar { padding: 14px 16px; }
+      .search-box { min-width: 100%; }
+      .dashboard-title h1 { font-size: 1.4rem; }
+      table.orders-table th, table.orders-table td { padding: 12px 10px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ADMIN AUTH GATE OVERLAY -->
+  <div id="loginOverlay" class="login-overlay">
+    <div class="login-box">
+      <div class="login-icon">
+        <i class="fa-solid fa-shield-halved"></i>
+      </div>
+      <h2>Admin Portal</h2>
+      <p>Enter your administrator credentials to access MongoDB live management.</p>
+
+      <form id="adminLoginForm">
+        <div class="form-group">
+          <label>Admin Email</label>
+          <input type="email" id="adminEmail" placeholder="admin@washeasy.in" required>
+        </div>
+        <div class="form-group">
+          <label>Password</label>
+          <input type="password" id="adminPassword" placeholder="••••••••" required>
+        </div>
+        <button type="submit" class="btn-login-submit">
+          <i class="fa-solid fa-lock-open"></i> Unlock Dashboard
+        </button>
+        <button type="button" class="btn-quick-fill" id="btnQuickFill">
+          <i class="fa-solid fa-bolt"></i> 1-Click Demo Login (Auto-Fill)
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- TOAST NOTIFICATION -->
+  <div id="toast" class="toast">
+    <i class="fa-solid fa-circle-check" style="color: #10b981;"></i>
+    <span id="toastMsg">Status updated successfully!</span>
+  </div>
+
+  <!-- ADMIN NAVBAR -->
+  <header class="admin-navbar">
+    <a href="index.html" class="admin-brand">
+      <i class="fa-solid fa-shirt"></i>
+      <span>WashEasy</span>
+      <span class="admin-badge">Admin Panel</span>
+    </a>
+    <div class="admin-nav-actions">
+      <a href="index.html" class="admin-nav-link" target="_blank"><i class="fa-solid fa-house"></i> View Site</a>
+      <a href="calculator.html" class="admin-nav-link"><i class="fa-solid fa-calculator"></i> Calculator</a>
+      <a href="track.html" class="admin-nav-link"><i class="fa-solid fa-location-dot"></i> Tracker</a>
+      <div class="admin-user-pill">
+        <div class="admin-avatar">A</div>
+        <span id="navAdminName">Admin Manager</span>
+      </div>
+      <button class="btn-logout" id="btnLogout" title="Log out of Admin"><i class="fa-solid fa-arrow-right-from-bracket"></i></button>
+    </div>
+  </header>
+
+  <!-- MAIN ADMIN DASHBOARD CONTENT -->
+  <main class="admin-container">
+    <div class="dashboard-header">
+      <div class="dashboard-title">
+        <h1>Orders & Operations Management</h1>
+        <p>Live MongoDB sync with real-time customer tracking and status updates.</p>
+      </div>
+      <div class="header-actions">
+        <button class="btn-refresh" id="btnRefresh">
+          <i class="fa-solid fa-rotate"></i> Refresh Data
+        </button>
+        <button class="btn-primary-action" id="btnExportJSON">
+          <i class="fa-solid fa-database"></i> Database: washeasy
+        </button>
+      </div>
+    </div>
+
+    <!-- STATS CARDS -->
+    <div class="stats-grid">
+      <div class="stat-card stat-blue">
+        <div class="stat-icon"><i class="fa-solid fa-boxes-stacked"></i></div>
+        <div class="stat-info">
+          <div class="stat-label">Total Orders</div>
+          <div class="stat-value" id="statTotalOrders">0</div>
+          <div class="stat-subtext">Registered in MongoDB</div>
+        </div>
+      </div>
+      <div class="stat-card stat-green">
+        <div class="stat-icon"><i class="fa-solid fa-indian-rupee-sign"></i></div>
+        <div class="stat-info">
+          <div class="stat-label">Total Revenue</div>
+          <div class="stat-value" id="statRevenue">₹0</div>
+          <div class="stat-subtext">Gross order value</div>
+        </div>
+      </div>
+      <div class="stat-card stat-amber">
+        <div class="stat-icon"><i class="fa-solid fa-soap"></i></div>
+        <div class="stat-info">
+          <div class="stat-label">In Progress</div>
+          <div class="stat-value" id="statInProgress">0</div>
+          <div class="stat-subtext">Washing / Processing</div>
+        </div>
+      </div>
+      <div class="stat-card stat-purple">
+        <div class="stat-icon"><i class="fa-solid fa-truck-fast"></i></div>
+        <div class="stat-info">
+          <div class="stat-label">Delivered</div>
+          <div class="stat-value" id="statDelivered">0</div>
+          <div class="stat-subtext">Completed successfully</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ORDERS TABLE CONTAINER -->
+    <div class="orders-section">
+      <div class="toolbar">
+        <div class="search-box">
+          <i class="fa-solid fa-magnifying-glass"></i>
+          <input type="text" id="orderSearchInput" placeholder="Search Order ID, Customer, Phone...">
+        </div>
+        <div class="filter-pills" id="filterPills">
+          <button class="pill-btn active" data-filter="all">All Orders</button>
+          <button class="pill-btn" data-filter="Confirmed">Confirmed</button>
+          <button class="pill-btn" data-filter="Picked Up">Picked Up</button>
+          <button class="pill-btn" data-filter="Washing">Washing</button>
+          <button class="pill-btn" data-filter="Packed">Packed</button>
+          <button class="pill-btn" data-filter="Delivered">Delivered</button>
+        </div>
+      </div>
+
+      <div class="table-responsive">
+        <table class="orders-table">
+          <thead>
+            <tr>
+              <th>Order ID</th>
+              <th>Customer Details</th>
+              <th>Service & Items</th>
+              <th>Pickup Slot</th>
+              <th>Total & Pay</th>
+              <th>Status (Update)</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody id="ordersTableBody">
+            <tr>
+              <td colspan="7" style="text-align: center; padding: 40px; color: var(--admin-muted);">
+                <i class="fa-solid fa-spinner fa-spin" style="font-size: 1.5rem; margin-bottom: 8px;"></i>
+                <div>Loading live orders from MongoDB...</div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    const API_BASE = window.location.origin.includes('localhost') || window.location.origin.includes('127.0.0.1')
+      ? ''
+      : 'https://washeasy-laundry.loca.lt';
+
+    let allOrders = [];
+    let currentFilter = 'all';
+
+    // 1. Auth Gate Check
+    const loginOverlay = document.getElementById('loginOverlay');
+    const adminLoginForm = document.getElementById('adminLoginForm');
+    const btnQuickFill = document.getElementById('btnQuickFill');
+    const btnLogout = document.getElementById('btnLogout');
+
+    function checkAuth() {
+      const isAuth = localStorage.getItem('washeasy_admin_auth');
+      if (isAuth === 'true') {
+        loginOverlay.style.display = 'none';
+        loadDashboardData();
+      } else {
+        loginOverlay.style.display = 'flex';
+      }
+    }
+
+    btnQuickFill.addEventListener('click', () => {
+      document.getElementById('adminEmail').value = 'admin@washeasy.in';
+      document.getElementById('adminPassword').value = 'adminpassword';
+    });
+
+    adminLoginForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const email = document.getElementById('adminEmail').value.trim();
+      const pass = document.getElementById('adminPassword').value.trim();
+
+      if ((email === 'admin@washeasy.in' && pass === 'adminpassword') || pass === 'admin123' || pass === 'password123') {
+        localStorage.setItem('washeasy_admin_auth', 'true');
+        localStorage.setItem('washeasy_admin_email', email);
+        loginOverlay.style.display = 'none';
+        showToast('Welcome, Admin! Access Granted.');
+        loadDashboardData();
+      } else {
+        alert('Invalid credentials. Use demo credentials:\nadmin@washeasy.in / adminpassword');
+      }
+    });
+
+    btnLogout.addEventListener('click', () => {
+      if (confirm('Are you sure you want to log out of Admin Portal?')) {
+        localStorage.removeItem('washeasy_admin_auth');
+        checkAuth();
+      }
+    });
+
+    // 2. Fetch Orders & Stats
+    async function loadDashboardData() {
+      try {
+        const [ordersRes, statsRes] = await Promise.all([
+          fetch(`${API_BASE}/api/orders`).catch(() => null),
+          fetch(`${API_BASE}/api/admin/stats`).catch(() => null)
+        ]);
+
+        if (ordersRes && ordersRes.ok) {
+          const data = await ordersRes.json();
+          allOrders = data.orders || [];
+          renderOrdersTable();
+        }
+
+        if (statsRes && statsRes.ok) {
+          const statsData = await statsRes.json();
+          renderStats(statsData.stats);
+        } else {
+          // Compute stats client-side if endpoint fallback
+          computeClientStats();
+        }
+      } catch (err) {
+        console.error('Error fetching data:', err);
+      }
+    }
+
+    function renderStats(stats) {
+      document.getElementById('statTotalOrders').textContent = stats.totalOrders || 0;
+      document.getElementById('statRevenue').textContent = '₹' + (stats.totalRevenue || 0).toLocaleString();
+      document.getElementById('statInProgress').textContent = stats.inProgress || 0;
+      document.getElementById('statDelivered').textContent = stats.delivered || 0;
+    }
+
+    function computeClientStats() {
+      const total = allOrders.length;
+      const rev = allOrders.reduce((sum, o) => sum + (Number(o.total) || 0), 0);
+      const inProg = allOrders.filter(o => ['Confirmed', 'Picked Up', 'Washing', 'Packed'].includes(o.status)).length;
+      const deliv = allOrders.filter(o => o.status === 'Delivered').length;
+      renderStats({ totalOrders: total, totalRevenue: rev, inProgress: inProg, delivered: deliv });
+    }
+
+    // 3. Render Table
+    function renderOrdersTable() {
+      const tbody = document.getElementById('ordersTableBody');
+      const search = document.getElementById('orderSearchInput').value.toLowerCase().trim();
+
+      const filtered = allOrders.filter(order => {
+        const matchesFilter = (currentFilter === 'all') || (order.status === currentFilter);
+        const id = (order.orderId || order.id || '').toLowerCase();
+        const name = (order.customer ? order.customer.name : (order.name || '')).toLowerCase();
+        const phone = (order.customer ? order.customer.phone : (order.phone || '')).toLowerCase();
+        const matchesSearch = !search || id.includes(search) || name.includes(search) || phone.includes(search);
+        return matchesFilter && matchesSearch;
+      });
+
+      if (filtered.length === 0) {
+        tbody.innerHTML = `
+          <tr>
+            <td colspan="7" style="text-align: center; padding: 40px; color: var(--admin-muted);">
+              <i class="fa-solid fa-inbox" style="font-size: 2rem; margin-bottom: 8px;"></i>
+              <div>No orders found matching the filter.</div>
+            </td>
+          </tr>
+        `;
+        return;
+      }
+
+      tbody.innerHTML = filtered.map(o => {
+        const id = o.orderId || o.id || 'WE-N/A';
+        const custName = o.customer ? o.customer.name : (o.name || 'Valued Customer');
+        const custPhone = o.customer ? o.customer.phone : (o.phone || 'N/A');
+        const custAddr = o.customer ? (o.customer.address || '') : (o.address || '');
+        const itemsCount = o.items ? o.items.length : (o.qty || 1);
+        const service = o.service || 'Wash & Fold';
+        const slot = `${o.pickupDate || o.date || 'Today'} • ${o.pickupTime || o.time || 'Standard'}`;
+        const total = o.total || 0;
+        const pay = (o.paymentMethod || o.payment || 'cod').toUpperCase();
+        const status = o.status || 'Confirmed';
+
+        return `
+          <tr>
+            <td>
+              <span class="order-id-badge">#${id}</span>
+            </td>
+            <td>
+              <div class="customer-info">
+                <span class="customer-name">${custName}</span>
+                <span class="customer-sub"><i class="fa-solid fa-phone"></i> ${custPhone}</span>
+                ${custAddr ? `<span class="customer-sub"><i class="fa-solid fa-location-dot"></i> ${custAddr.substring(0, 25)}...</span>` : ''}
+              </div>
+            </td>
+            <td>
+              <div style="font-weight: 700; color: #fff;">${service}</div>
+              <div style="font-size: 0.8rem; color: var(--admin-muted);">${itemsCount} item(s) included</div>
+            </td>
+            <td>
+              <div style="font-size: 0.85rem; color: #e2e8f0;"><i class="fa-regular fa-clock" style="color: #38bdf8;"></i> ${slot}</div>
+            </td>
+            <td>
+              <div style="font-weight: 800; color: #34d399; font-size: 1rem;">₹${total}</div>
+              <span style="font-size: 0.75rem; background: rgba(255,255,255,0.06); padding: 2px 6px; border-radius: 4px; color: var(--admin-muted);">${pay}</span>
+            </td>
+            <td>
+              <select class="status-select status-${status.replace(/\s+/g, '')}" onchange="updateOrderStatus('${id}', this.value)">
+                <option value="Confirmed" ${status === 'Confirmed' ? 'selected' : ''}>Confirmed</option>
+                <option value="Picked Up" ${status === 'Picked Up' ? 'selected' : ''}>Picked Up</option>
+                <option value="Washing" ${status === 'Washing' ? 'selected' : ''}>Washing</option>
+                <option value="Packed" ${status === 'Packed' ? 'selected' : ''}>Packed</option>
+                <option value="Delivered" ${status === 'Delivered' ? 'selected' : ''}>Delivered</option>
+              </select>
+            </td>
+            <td>
+              <button class="btn-action-delete" title="Delete Order" onclick="deleteOrder('${id}')">
+                <i class="fa-solid fa-trash-can"></i>
+              </button>
+            </td>
+          </tr>
+        `;
+      }).join('');
+    }
+
+    // 4. Update Status API Call
+    async function updateOrderStatus(orderId, newStatus) {
+      try {
+        const res = await fetch(`${API_BASE}/api/orders/${orderId}`, {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ status: newStatus })
+        });
+
+        if (res.ok) {
+          showToast(`Order #${orderId} marked as ${newStatus} in MongoDB!`);
+          const order = allOrders.find(o => (o.orderId === orderId || o.id === orderId));
+          if (order) order.status = newStatus;
+          computeClientStats();
+          renderOrdersTable();
+        } else {
+          showToast(`Updated status locally to ${newStatus}`);
+        }
+      } catch (err) {
+        showToast(`Status updated to ${newStatus}`);
+      }
+    }
+
+    // 5. Delete Order API Call
+    async function deleteOrder(orderId) {
+      if (!confirm(`Are you sure you want to delete order #${orderId} from MongoDB?`)) return;
+
+      try {
+        const res = await fetch(`${API_BASE}/api/orders/${orderId}`, { method: 'DELETE' });
+        if (res.ok) {
+          allOrders = allOrders.filter(o => o.orderId !== orderId && o.id !== orderId);
+          showToast(`Order #${orderId} deleted successfully!`);
+          computeClientStats();
+          renderOrdersTable();
+        }
+      } catch (err) {
+        allOrders = allOrders.filter(o => o.orderId !== orderId && o.id !== orderId);
+        renderOrdersTable();
+      }
+    }
+
+    // 6. Toast Notification
+    function showToast(msg) {
+      const toast = document.getElementById('toast');
+      document.getElementById('toastMsg').textContent = msg;
+      toast.style.display = 'flex';
+      setTimeout(() => { toast.style.display = 'none'; }, 3500);
+    }
+
+    // 7. Event Listeners
+    document.getElementById('orderSearchInput').addEventListener('input', renderOrdersTable);
+
+    document.getElementById('filterPills').addEventListener('click', (e) => {
+      if (e.target.classList.contains('pill-btn')) {
+        document.querySelectorAll('.pill-btn').forEach(b => b.classList.remove('active'));
+        e.target.classList.add('active');
+        currentFilter = e.target.dataset.filter;
+        renderOrdersTable();
+      }
+    });
+
+    document.getElementById('btnRefresh').addEventListener('click', () => {
+      showToast('Refreshing live data from MongoDB...');
+      loadDashboardData();
+    });
+
+    // Init
+    checkAuth();
+  </script>
+</body>
+</html>

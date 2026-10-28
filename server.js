@@ -339,6 +339,81 @@ const server = http.createServer(async (req, res) => {
     }
   }
 
+  // 7. Orders: Update Status (Admin)
+  if (pathname.startsWith('/api/orders/') && (req.method === 'PUT' || req.method === 'PATCH')) {
+    try {
+      const parts = pathname.replace('/api/orders/', '').split('/');
+      const id = parts[0].trim().toUpperCase();
+      const body = await parseBody(req);
+      const status = body.status;
+
+      const orderIndex = db.orders.findIndex(o => (o.id && o.id.toUpperCase() === id) || (o.orderId && o.orderId.toUpperCase() === id));
+      if (orderIndex === -1) {
+        return sendJSON(res, 404, { success: false, error: 'Order not found' });
+      }
+
+      db.orders[orderIndex].status = status;
+      saveDB();
+
+      if (mongoConnected && OrderModel) {
+        await OrderModel.findOneAndUpdate({ orderId: id }, { status: status });
+      }
+
+      return sendJSON(res, 200, {
+        success: true,
+        message: `Order #${id} status updated to ${status}`,
+        order: db.orders[orderIndex]
+      });
+    } catch (err) {
+      return sendJSON(res, 500, { error: err.message });
+    }
+  }
+
+  // 8. Orders: Delete Order (Admin)
+  if (pathname.startsWith('/api/orders/') && req.method === 'DELETE') {
+    try {
+      const id = pathname.replace('/api/orders/', '').trim().toUpperCase();
+      const orderIndex = db.orders.findIndex(o => (o.id && o.id.toUpperCase() === id) || (o.orderId && o.orderId.toUpperCase() === id));
+      if (orderIndex === -1) {
+        return sendJSON(res, 404, { success: false, error: 'Order not found' });
+      }
+
+      const deleted = db.orders.splice(orderIndex, 1);
+      saveDB();
+
+      if (mongoConnected && OrderModel) {
+        await OrderModel.findOneAndDelete({ orderId: id });
+      }
+
+      return sendJSON(res, 200, {
+        success: true,
+        message: `Order #${id} deleted successfully`,
+        deleted: deleted[0]
+      });
+    } catch (err) {
+      return sendJSON(res, 500, { error: err.message });
+    }
+  }
+
+  // 9. Admin Stats API
+  if (pathname === '/api/admin/stats' && req.method === 'GET') {
+    const totalOrders = db.orders.length;
+    const totalRevenue = db.orders.reduce((sum, o) => sum + (Number(o.total) || 0), 0);
+    const inProgress = db.orders.filter(o => ['Confirmed', 'Picked Up', 'Washing', 'Packed'].includes(o.status)).length;
+    const delivered = db.orders.filter(o => o.status === 'Delivered').length;
+
+    return sendJSON(res, 200, {
+      success: true,
+      stats: {
+        totalOrders,
+        totalRevenue,
+        inProgress,
+        delivered,
+        totalUsers: db.users.length
+      }
+    });
+  }
+
   // ----------------------------------------------------
   // STATIC FILE SERVING
   // ----------------------------------------------------
