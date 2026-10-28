@@ -8,6 +8,10 @@ const fs = require('fs');
 const path = require('path');
 const crypto = require('crypto');
 
+try {
+  require('dotenv').config();
+} catch (e) {}
+
 const PORT = process.env.PORT || 3000;
 const DATA_DIR = path.join(__dirname, 'data');
 const DB_FILE = path.join(DATA_DIR, 'database.json');
@@ -41,26 +45,40 @@ function saveDB() {
   }
 }
 
-// Optional MongoDB connection attempt
+// MongoDB connection & auto-sync
 let mongoConnected = false;
 let OrderModel = null;
 let UserModel = null;
 
 try {
   const mongoose = require('mongoose');
-  const mongoUri = process.env.MONGODB_URI;
-  if (mongoUri) {
-    mongoose.connect(mongoUri, { serverSelectionTimeoutMS: 2000 })
-      .then(() => {
-        mongoConnected = true;
-        OrderModel = require('./models/Order');
-        UserModel = require('./models/User');
-        console.log('[MongoDB] Connected to Cloud Database successfully!');
-      })
-      .catch(err => {
-        console.log('[MongoDB] Connection skipped:', err.message);
-      });
-  }
+  const mongoUri = process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/washeasy';
+  mongoose.connect(mongoUri, { serverSelectionTimeoutMS: 3000 })
+    .then(async () => {
+      mongoConnected = true;
+      OrderModel = require('./models/Order');
+      UserModel = require('./models/User');
+      console.log(`[MongoDB] Connected to database: ${mongoUri}`);
+
+      // Sync data from MongoDB into live server memory & JSON
+      try {
+        const mongoOrders = await OrderModel.find().lean();
+        const mongoUsers = await UserModel.find().lean();
+        if (mongoOrders.length > 0) {
+          db.orders = mongoOrders.map(o => ({ ...o, id: o.orderId }));
+        }
+        if (mongoUsers.length > 0) {
+          db.users = mongoUsers.map(u => ({ ...u, id: u._id.toString() }));
+        }
+        saveDB();
+        console.log(`[MongoDB] Synced ${db.orders.length} orders & ${db.users.length} users into live memory.`);
+      } catch (err) {
+        console.warn('[MongoDB] Sync error:', err.message);
+      }
+    })
+    .catch(err => {
+      console.log('[MongoDB] Connection skipped:', err.message);
+    });
 } catch (e) {
   // Mongoose not installed or running zero-dependency mode
 }
@@ -133,7 +151,10 @@ const server = http.createServer(async (req, res) => {
     return sendJSON(res, 200, {
       status: 'ok',
       service: 'WashEasy Laundry API',
-      database: mongoConnected ? 'MongoDB Cloud' : 'Local JSON Store',
+      database: mongoConnected ? 'MongoDB (Connected)' : 'Local JSON Store',
+      mongoUri: mongoConnected ? (process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/washeasy') : null,
+      ordersCount: db.orders.length,
+      usersCount: db.users.length,
       uptime: process.uptime(),
       timestamp: new Date().toISOString()
     });
@@ -162,6 +183,17 @@ const server = http.createServer(async (req, res) => {
 
       db.users.push(newUser);
       saveDB();
+
+      // Persist to MongoDB if connected
+      if (mongoConnected && UserModel) {
+        UserModel.create({
+          name: newUser.name,
+          email: newUser.email,
+          phone: newUser.phone || '0000000000',
+          password: password,
+          address: ''
+        }).catch(err => console.error('[MongoDB Error saving user]:', err.message));
+      }
 
       return sendJSON(res, 201, {
         success: true,
@@ -234,6 +266,31 @@ const server = http.createServer(async (req, res) => {
 
       db.orders.push(newOrder);
       saveDB();
+
+      // Persist to MongoDB if connected
+      if (mongoConnected && OrderModel) {
+        OrderModel.create({
+          orderId,
+          service: newOrder.service,
+          qty: newOrder.qty,
+          items: newOrder.items,
+          subtotal: newOrder.subtotal,
+          deliveryFee: newOrder.deliveryFee,
+          addOns: newOrder.addOns,
+          promoCode: newOrder.promoCode,
+          promoDiscount: newOrder.promoDiscount,
+          total: newOrder.total,
+          paymentMethod: newOrder.payment || 'cod',
+          status: newOrder.status || 'Confirmed',
+          customer: {
+            name: orderData.name || 'Customer',
+            phone: newOrder.phone,
+            address: newOrder.address
+          },
+          pickupDate: newOrder.date,
+          pickupTime: newOrder.time
+        }).catch(err => console.error('[MongoDB Error saving order]:', err.message));
+      }
 
       console.log(`[Order] New order placed: #${orderId} (₹${newOrder.total})`);
 
