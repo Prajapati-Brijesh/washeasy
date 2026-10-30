@@ -128,6 +128,49 @@ function parseBody(req) {
   });
 }
 
+
+// Pre-load all HTML and CSS pages into memory for 100% reliability on Vercel & Cloud
+const pageCache = {};
+const PAGES = {
+  '/': path.join(__dirname, 'index.html'),
+  '/index.html': path.join(__dirname, 'index.html'),
+  '/services': path.join(__dirname, 'services.html'),
+  '/services.html': path.join(__dirname, 'services.html'),
+  '/pricing': path.join(__dirname, 'pricing.html'),
+  '/pricing.html': path.join(__dirname, 'pricing.html'),
+  '/calculator': path.join(__dirname, 'calculator.html'),
+  '/calculator.html': path.join(__dirname, 'calculator.html'),
+  '/gallery': path.join(__dirname, 'gallery.html'),
+  '/gallery.html': path.join(__dirname, 'gallery.html'),
+  '/track': path.join(__dirname, 'track.html'),
+  '/track.html': path.join(__dirname, 'track.html'),
+  '/admin': path.join(__dirname, 'admin.html'),
+  '/admin.html': path.join(__dirname, 'admin.html'),
+  '/contact': path.join(__dirname, 'contact.html'),
+  '/contact.html': path.join(__dirname, 'contact.html'),
+  '/style.css': path.join(__dirname, 'style.css')
+};
+
+for (const [route, p] of Object.entries(PAGES)) {
+  try {
+    if (fs.existsSync(p)) pageCache[route] = fs.readFileSync(p);
+  } catch (e) {}
+}
+
+const imageCache = {};
+const IMAGES = {
+  '/img_shirt.png': path.join(__dirname, 'img_shirt.png'),
+  '/img_jacket.png': path.join(__dirname, 'img_jacket.png'),
+  '/img_bedsheet.png': path.join(__dirname, 'img_bedsheet.png'),
+  '/img_sweater.png': path.join(__dirname, 'img_sweater.png')
+};
+
+for (const [route, p] of Object.entries(IMAGES)) {
+  try {
+    if (fs.existsSync(p)) imageCache[route] = fs.readFileSync(p);
+  } catch (e) {}
+}
+
 const server = http.createServer(async (req, res) => {
   // Handle CORS preflight
   if (req.method === 'OPTIONS') {
@@ -417,6 +460,27 @@ const server = http.createServer(async (req, res) => {
 
   // ----------------------------------------------------
   // STATIC FILE SERVING
+  // 1. Direct In-Memory Page Cache (Guaranteed Instant 200 OK)
+  if (pageCache[pathname]) {
+    const isCSS = pathname.endsWith('.css');
+    res.writeHead(200, {
+      'Content-Type': isCSS ? 'text/css; charset=utf-8' : 'text/html; charset=utf-8',
+      'Access-Control-Allow-Origin': '*',
+      'Cache-Control': 'public, max-age=3600'
+    });
+    return res.end(pageCache[pathname]);
+  }
+
+  // 2. Direct In-Memory Image Cache (Guaranteed Instant 200 OK)
+  if (imageCache[pathname]) {
+    res.writeHead(200, {
+      'Content-Type': 'image/png',
+      'Access-Control-Allow-Origin': '*',
+      'Cache-Control': 'public, max-age=86400'
+    });
+    return res.end(imageCache[pathname]);
+  }
+
   // ----------------------------------------------------
   let filePath = pathname === '/' ? '/index.html' : pathname;
   let absPath = path.join(__dirname, filePath);
