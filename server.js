@@ -466,7 +466,7 @@ const server = http.createServer(async (req, res) => {
     res.writeHead(200, {
       'Content-Type': isCSS ? 'text/css; charset=utf-8' : 'text/html; charset=utf-8',
       'Access-Control-Allow-Origin': '*',
-      'Cache-Control': 'public, max-age=3600'
+      'Cache-Control': 'no-cache, no-store, must-revalidate'
     });
     return res.end(pageCache[pathname]);
   }

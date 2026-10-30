@@ -1814,7 +1814,7 @@ section { padding: 5rem 0; }
     flex-shrink: 0 !important;
   }
 
-  /* Fix 4: Floating WhatsApp Button - Move to Bottom RIGHT so it NEVER covers text */
+    /* Fix 4: Floating WhatsApp Button - Move to Bottom RIGHT so it NEVER covers text */
   .floating-whatsapp {
     position: fixed !important;
     bottom: 20px !important;
@@ -1829,4 +1829,21 @@ section { padding: 5rem 0; }
   .floating-whatsapp .wa-tooltip {
     display: none !important;
   }
+
+  /* Mobile Drawer Auth Button */
+  .mobile-drawer-auth {
+    display: block !important;
+    margin-top: 0.6rem !important;
+  }
+  .mobile-drawer-auth a {
+    background: linear-gradient(135deg, #7C3AED, #EC4899) !important;
+    color: #ffffff !important;
+    font-weight: 700 !important;
+    border: none !important;
+    box-shadow: 0 4px 15px rgba(236, 72, 153, 0.3) !important;
+  }
+}
+
+.mobile-drawer-auth {
+  display: none !important;
 }

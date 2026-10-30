@@ -10,7 +10,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="style.css?v=2.2" />
   <style>
 /* =====================================================
    WashEasy – Modern Premium Stylesheet 2026
@@ -2068,6 +2068,7 @@ section { padding: 5rem 0; }
       <li><a href="track.html" class=""><i class="fas fa-truck"></i> Track Order</a></li>
       <li><a href="admin.html" class=""><i class="fas fa-user-shield"></i> Admin</a></li>
       <li><a href="contact.html" class=""><i class="fas fa-envelope"></i> Contact</a></li>
+      <li class="mobile-drawer-auth"><a href="#" id="mobile-auth-link" onclick="openAuth(); toggleMenu();"><i class="fas fa-user-circle"></i> Login / Register</a></li>
     </ul>
     <div class="nav-actions">
       <div class="user-menu hidden" id="user-menu">
@@ -2548,14 +2549,23 @@ function updateAuthUI() {
   const loginBtn = document.getElementById('login-btn');
   const userMenu = document.getElementById('user-menu');
   const userName = document.getElementById('user-name-display');
+  const mobileAuth = document.getElementById('mobile-auth-link');
 
   if (currentUser) {
     if (loginBtn) loginBtn.classList.add('hidden');
     if (userMenu) userMenu.classList.remove('hidden');
     if (userName) userName.textContent = currentUser.name;
+    if (mobileAuth) {
+      mobileAuth.innerHTML = '<i class="fas fa-user-circle"></i> Hi, ' + currentUser.name + ' (Logout)';
+      mobileAuth.onclick = () => { logout(); toggleMenu(); };
+    }
   } else {
     if (loginBtn) loginBtn.classList.remove('hidden');
     if (userMenu) userMenu.classList.add('hidden');
+    if (mobileAuth) {
+      mobileAuth.innerHTML = '<i class="fas fa-sign-in-alt"></i> Login / Sign Up';
+      mobileAuth.onclick = () => { openAuth(); toggleMenu(); };
+    }
   }
 }
 
