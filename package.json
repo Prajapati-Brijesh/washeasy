@@ -3,10 +3,9 @@
   "version": "1.0.0",
   "description": "WashEasy Laundry Multi-Page Website",
   "scripts": {
-    "build": "echo 'Static site ready for Vercel'",
     "start": "node server.js"
   },
-  "dependencies": {
+  "devDependencies": {
     "dotenv": "^18.0.9",
     "mongoose": "^9.11.4"
   }
