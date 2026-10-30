@@ -419,7 +419,11 @@ const server = http.createServer(async (req, res) => {
   // STATIC FILE SERVING
   // ----------------------------------------------------
   let filePath = pathname === '/' ? '/index.html' : pathname;
-  const absPath = path.join(__dirname, filePath);
+  let absPath = path.join(__dirname, filePath);
+  if (!fs.existsSync(absPath)) {
+    const cwdPath = path.join(process.cwd(), filePath);
+    if (fs.existsSync(cwdPath)) absPath = cwdPath;
+  }
 
   fs.stat(absPath, (err, stats) => {
     if (err || !stats.isFile()) {
