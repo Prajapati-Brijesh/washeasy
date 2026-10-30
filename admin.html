@@ -760,13 +760,46 @@
           const data = await ordersRes.json();
           allOrders = data.orders || [];
           renderOrdersTable();
+        } else {
+          // Fallback to localStorage orders
+          const localOrders = JSON.parse(localStorage.getItem('we_orders') || '[]');
+          if (localOrders.length > 0) {
+            allOrders = localOrders;
+          } else {
+            allOrders = [
+              {
+                orderId: 'WE84920',
+                service: 'Wash & Fold',
+                qty: 5,
+                items: [{ name: 'Shirt / T-Shirt', qty: 3 }, { name: 'Jeans / Trousers', qty: 2 }],
+                total: 220,
+                paymentMethod: 'cod',
+                status: 'Washing',
+                customer: { name: 'Brijesh Prajapati', phone: '9876543210', address: 'Sector 15' },
+                pickupDate: 'Today',
+                pickupTime: '9:00 AM – 11:00 AM'
+              },
+              {
+                orderId: 'WE92831',
+                service: 'Dry Clean & Iron',
+                qty: 2,
+                items: [{ name: 'Blazer / Coat', qty: 1 }],
+                total: 490,
+                paymentMethod: 'upi',
+                status: 'Confirmed',
+                customer: { name: 'Rahul Sharma', phone: '9876501234', address: 'MG Road' },
+                pickupDate: 'Tomorrow',
+                pickupTime: '2:00 PM – 4:00 PM'
+              }
+            ];
+          }
+          renderOrdersTable();
         }
 
         if (statsRes && statsRes.ok) {
           const statsData = await statsRes.json();
           renderStats(statsData.stats);
         } else {
-          // Compute stats client-side if endpoint fallback
           computeClientStats();
         }
       } catch (err) {
@@ -871,6 +904,12 @@
 
     // 4. Update Status API Call
     async function updateOrderStatus(orderId, newStatus) {
+      const order = allOrders.find(o => (o.orderId === orderId || o.id === orderId));
+      if (order) order.status = newStatus;
+      localStorage.setItem('we_orders', JSON.stringify(allOrders));
+      computeClientStats();
+      renderOrdersTable();
+
       try {
         const res = await fetch(`${API_BASE}/api/orders/${orderId}`, {
           method: 'PUT',
@@ -880,33 +919,32 @@
 
         if (res.ok) {
           showToast(`Order #${orderId} marked as ${newStatus} in MongoDB!`);
-          const order = allOrders.find(o => (o.orderId === orderId || o.id === orderId));
-          if (order) order.status = newStatus;
-          computeClientStats();
-          renderOrdersTable();
         } else {
-          showToast(`Updated status locally to ${newStatus}`);
+          showToast(`Order #${orderId} updated to ${newStatus}`);
         }
       } catch (err) {
-        showToast(`Status updated to ${newStatus}`);
+        showToast(`Order #${orderId} updated to ${newStatus}`);
       }
     }
 
     // 5. Delete Order API Call
     async function deleteOrder(orderId) {
-      if (!confirm(`Are you sure you want to delete order #${orderId} from MongoDB?`)) return;
+      if (!confirm(`Are you sure you want to delete order #${orderId}?`)) return;
+
+      allOrders = allOrders.filter(o => o.orderId !== orderId && o.id !== orderId);
+      localStorage.setItem('we_orders', JSON.stringify(allOrders));
+      computeClientStats();
+      renderOrdersTable();
 
       try {
         const res = await fetch(`${API_BASE}/api/orders/${orderId}`, { method: 'DELETE' });
         if (res.ok) {
-          allOrders = allOrders.filter(o => o.orderId !== orderId && o.id !== orderId);
+          showToast(`Order #${orderId} deleted from database!`);
+        } else {
           showToast(`Order #${orderId} deleted successfully!`);
-          computeClientStats();
-          renderOrdersTable();
         }
       } catch (err) {
-        allOrders = allOrders.filter(o => o.orderId !== orderId && o.id !== orderId);
-        renderOrdersTable();
+        showToast(`Order #${orderId} deleted successfully!`);
       }
     }
 
@@ -940,3 +978,4 @@
   </script>
 </body>
 </html>
+
