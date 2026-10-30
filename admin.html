@@ -1021,6 +1021,193 @@
   }
 }
 
+
+/* ===================================================== */
+/* IPHONE & MOBILE PRECISION PERFECTION FIXES */
+/* ===================================================== */
+.hidden { display: none !important; }
+
+/* Desktop styles for hero-cta-sub-row */
+.hero-cta-sub-row {
+  display: flex;
+  gap: 0.8rem;
+}
+
+@media screen and (max-width: 768px) {
+  /* Fix 1: Top Navbar on Mobile (No cut-offs, no overflowing) */
+  .navbar {
+    padding: 0.5rem 0 !important;
+  }
+  .nav-container {
+    width: 95% !important;
+    padding: 0 4px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+  }
+  .nav-logo {
+    font-size: 1.25rem !important;
+    gap: 0.3rem !important;
+    flex-shrink: 0 !important;
+  }
+  .logo-icon {
+    font-size: 1.4rem !important;
+  }
+  .nav-actions {
+    display: flex !important;
+    align-items: center !important;
+    gap: 0.4rem !important;
+    flex-shrink: 0 !important;
+  }
+  /* Hide desktop user and login buttons from mobile top bar */
+  .nav-actions .user-menu,
+  .nav-actions #user-menu,
+  .nav-actions #login-btn,
+  .nav-actions .btn-outline-nav {
+    display: none !important;
+  }
+  .btn-primary-nav {
+    padding: 0.4rem 0.75rem !important;
+    font-size: 0.78rem !important;
+    font-weight: 700 !important;
+    border-radius: 50px !important;
+    white-space: nowrap !important;
+    box-shadow: 0 2px 10px rgba(236, 72, 153, 0.3) !important;
+  }
+  .hamburger {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 4px !important;
+    background: rgba(255, 255, 255, 0.1) !important;
+    border: 1px solid rgba(255, 255, 255, 0.18) !important;
+    border-radius: 8px !important;
+    padding: 7px 6px !important;
+    cursor: pointer !important;
+    z-index: 960 !important;
+  }
+  .hamburger span {
+    display: block !important;
+    width: 20px !important;
+    height: 2px !important;
+    background: white !important;
+    border-radius: 2px !important;
+  }
+
+  /* Fix 2: Hero Section on Mobile */
+  .hero {
+    min-height: auto !important;
+    padding: 85px 1rem 30px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    text-align: center !important;
+  }
+  .hero-badge {
+    font-size: 0.75rem !important;
+    padding: 0.35rem 0.85rem !important;
+    margin-bottom: 0.8rem !important;
+  }
+  .hero-title {
+    font-size: 1.85rem !important;
+    line-height: 1.2 !important;
+    margin-bottom: 0.6rem !important;
+  }
+  .hero-subtitle {
+    font-size: 0.88rem !important;
+    line-height: 1.45 !important;
+    margin-bottom: 1.2rem !important;
+    color: #64748B !important;
+  }
+
+  /* Compact 2-tier Hero Buttons */
+  .hero-cta {
+    display: flex !important;
+    flex-direction: column !important;
+    width: 100% !important;
+    gap: 0.55rem !important;
+    margin-bottom: 1.2rem !important;
+  }
+  .btn-hero-primary {
+    width: 100% !important;
+    justify-content: center !important;
+    padding: 0.85rem 1.2rem !important;
+    font-size: 0.95rem !important;
+    border-radius: 50px !important;
+  }
+  .hero-cta-sub-row {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 0.55rem !important;
+    width: 100% !important;
+  }
+  .hero-cta-sub-row .btn-hero-outline {
+    width: 100% !important;
+    justify-content: center !important;
+    padding: 0.75rem 0.5rem !important;
+    font-size: 0.82rem !important;
+    white-space: nowrap !important;
+    border-radius: 50px !important;
+  }
+
+  /* Fix 3: Hero Stats Box (Single Row, No 2nd-line wrap, No Safari toolbar overlap) */
+  .hero-stats {
+    width: 100% !important;
+    max-width: 100% !important;
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    padding: 0.85rem 0.6rem !important;
+    margin: 0.5rem auto 2.5rem !important;
+    background: rgba(255, 255, 255, 0.98) !important;
+    border-radius: 18px !important;
+    border: 1px solid rgba(226, 232, 240, 0.9) !important;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08) !important;
+  }
+  .hero-stats .stat {
+    flex: 1 !important;
+    text-align: center !important;
+    padding: 0 2px !important;
+  }
+  .hero-stats .stat strong {
+    font-size: 1.12rem !important;
+    line-height: 1.1 !important;
+    margin-bottom: 2px !important;
+    display: block !important;
+    color: #0F172A !important;
+  }
+  .hero-stats .stat span {
+    font-size: 0.68rem !important;
+    line-height: 1.1 !important;
+    color: #64748B !important;
+    display: block !important;
+    white-space: nowrap !important;
+  }
+  .hero-stats .stat-divider {
+    display: block !important;
+    width: 1px !important;
+    height: 28px !important;
+    background: #E2E8F0 !important;
+    margin: 0 4px !important;
+    flex-shrink: 0 !important;
+  }
+
+  /* Fix 4: Floating WhatsApp Button - Move to Bottom RIGHT so it NEVER covers text */
+  .floating-whatsapp {
+    position: fixed !important;
+    bottom: 20px !important;
+    right: 18px !important;
+    left: auto !important;
+    width: 52px !important;
+    height: 52px !important;
+    font-size: 1.6rem !important;
+    z-index: 890 !important;
+    box-shadow: 0 8px 24px rgba(37, 211, 102, 0.5) !important;
+  }
+  .floating-whatsapp .wa-tooltip {
+    display: none !important;
+  }
+}
+
 </style>
 </head>
 <body>
