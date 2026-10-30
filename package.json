@@ -1,16 +1,10 @@
 {
-  "name": "londry",
+  "name": "washeasy",
   "version": "1.0.0",
-  "description": "",
-  "main": "app.js",
+  "description": "WashEasy Laundry Multi-Page Website",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "type": "commonjs",
   "dependencies": {
     "dotenv": "^18.0.9",
     "mongoose": "^9.11.4"
