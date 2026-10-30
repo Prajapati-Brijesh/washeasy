@@ -464,3 +464,5 @@ server.listen(PORT, '0.0.0.0', () => {
   console.log(` Database:    ${mongoConnected ? 'MongoDB Cloud Atlas' : 'Local JSON DB (' + DB_FILE + ')'}`);
   console.log(`====================================================`);
 });
+
+module.exports = server;
