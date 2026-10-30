@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "WashEasy Laundry Multi-Page Website",
   "scripts": {
+    "build": "echo 'Static site ready for Vercel'",
     "start": "node server.js"
   },
   "dependencies": {
