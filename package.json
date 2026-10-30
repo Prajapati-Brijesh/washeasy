@@ -2,10 +2,11 @@
   "name": "washeasy",
   "version": "1.0.0",
   "description": "WashEasy Laundry Multi-Page Website",
+  "main": "server.js",
   "scripts": {
     "start": "node server.js"
   },
-  "devDependencies": {
+  "dependencies": {
     "dotenv": "^18.0.9",
     "mongoose": "^9.11.4"
   }

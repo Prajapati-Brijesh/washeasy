@@ -12,14 +12,17 @@ try {
   require('dotenv').config();
 } catch (e) {}
 
+const isVercel = !!process.env.VERCEL;
 const PORT = process.env.PORT || 3000;
-const DATA_DIR = path.join(__dirname, 'data');
+const DATA_DIR = isVercel ? path.join(require('os').tmpdir(), 'washeasy_data') : path.join(__dirname, 'data');
 const DB_FILE = path.join(DATA_DIR, 'database.json');
 
-// Ensure data directory exists
-if (!fs.existsSync(DATA_DIR)) {
-  fs.mkdirSync(DATA_DIR, { recursive: true });
-}
+// Ensure data directory exists safely
+try {
+  if (!fs.existsSync(DATA_DIR)) {
+    fs.mkdirSync(DATA_DIR, { recursive: true });
+  }
+} catch (e) {}
 
 // In-Memory & Local JSON Store
 let db = {
@@ -40,9 +43,7 @@ if (fs.existsSync(DB_FILE)) {
 function saveDB() {
   try {
     fs.writeFileSync(DB_FILE, JSON.stringify(db, null, 2), 'utf8');
-  } catch (e) {
-    console.error('[Database] Failed to persist data:', e.message);
-  }
+  } catch (e) {}
 }
 
 // MongoDB connection & auto-sync
@@ -455,6 +456,7 @@ function serveFile(res, filePath) {
   });
 }
 
+if (!process.env.VERCEL) {
 server.listen(PORT, '0.0.0.0', () => {
   console.log(`====================================================`);
   console.log(` WashEasy Laundry Full-Stack Server Running!`);
@@ -464,5 +466,8 @@ server.listen(PORT, '0.0.0.0', () => {
   console.log(` Database:    ${mongoConnected ? 'MongoDB Cloud Atlas' : 'Local JSON DB (' + DB_FILE + ')'}`);
   console.log(`====================================================`);
 });
+}
 
-module.exports = server;
+module.exports = (req, res) => {
+  server.emit('request', req, res);
+};
